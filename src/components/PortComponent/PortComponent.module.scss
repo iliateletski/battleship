@@ -1,0 +1,29 @@
+.port{
+    width: 254px;
+    height: 254px;
+    border: 2px solid transparent;
+    &_lines{
+        height: 80%;
+        list-style: none;
+    }
+    &_line{
+        height: 25px;
+        margin-bottom: 25px;
+        display: flex;
+        // position: relative;
+    }
+    &_dock{
+        position: relative;
+        margin-right: 25px;
+    }
+}
+
+.btn_box{
+    display: flex;
+    height: 20%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+

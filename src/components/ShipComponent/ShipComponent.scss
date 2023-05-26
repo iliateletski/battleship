@@ -1,0 +1,18 @@
+.ship{
+    position: absolute;
+    border: 2px solid;
+    background-color:  transparent;
+    height: 25px;
+    &_1{
+        width: 25px;
+    }
+    &_2{
+        width: 50px;
+    }
+    &_3{
+        width: 75px;
+    }
+    &_4{
+        width: 100px;
+    }
+}
