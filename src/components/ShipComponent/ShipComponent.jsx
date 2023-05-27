@@ -6,22 +6,18 @@ import { observer } from "mobx-react-lite"
 const ShipComponent = ({ship}) => {
 
     const{application} = useContext(Context)
-    console.log(application)
-    console.log(ship)
+    // console.log(application)
+    // console.log(ship)
     
     
     
     return (
         <div 
             className={`ship ship_${ship.size}`}
-            style={{top: 0, left: 0}}
+            style={{top: ship.top, left: ship.left}}
             onMouseDown={(e) => {
-                application.setDragetShip(e.target, e.target.parentNode)
+                application.setDragetShip(e.target, e.target.parentNode, ship)
             }}
-            // onMouseUp={() => {
-            //     application.setDragetShip(null, null)
-            // }}
-            // onClick={() => }
         >
         </div>    
     )

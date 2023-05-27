@@ -1,19 +1,26 @@
-import React from "react"
+import React, { useContext } from "react"
 import CellComponent from "../CellComponent/CellComponent"
 import styles from "./BoardComponent.module.scss"
-import { Board } from "../../models/Board"
+import { Context } from "../.."
+import ShipComponent from "../ShipComponent/ShipComponent"
+import { observer } from "mobx-react-lite"
 
 
 
-const BoardComponent = () => {
+const BoardComponent = observer(() => {
 
-    const board = new Board()
+    const{application} = useContext(Context)
+    const{board} = application.player
+    console.log(board)
+    
+
+
     
     return (
         <div className={styles.board_box}>
             <div className={styles.board}>
                 {
-                    board.board.map((row, y) => 
+                    board.map((row, y) => 
                         <div className={styles.row} key={y}>
                             {
                                 row.map((cell, x) => 
@@ -28,6 +35,9 @@ const BoardComponent = () => {
                                         {
                                             cell.rowMarker && <div className={[styles.marker_row, styles.marker].join(' ')}>{cell.rowMarker}</div>
                                         }
+                                        {
+                                            cell.ship && <ShipComponent ship={cell.ship}/>
+                                        }
                                     </CellComponent>
                                 )
                             }
@@ -38,6 +48,6 @@ const BoardComponent = () => {
             </div>
         </div>
     )
-}
+})
 
 export default BoardComponent

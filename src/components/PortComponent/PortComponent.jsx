@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite"
 import React, { useContext, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { Context } from "../.."
@@ -6,8 +7,9 @@ import Button from "../Buttons/Button"
 import ShipComponent from "../ShipComponent/ShipComponent"
 import styles from "./PortComponent.module.scss"
 
-const PortComponent = ({setIsGame}) => {
+const PortComponent = observer(({setIsGame}) => {
 
+    
     const navigate = useNavigate()
     const cssStyles = {
         border: '2px solid',
@@ -16,9 +18,12 @@ const PortComponent = ({setIsGame}) => {
         lineHeight: '33px'
     }
 
+    
+    console.log('перерендер')
     const{application} = useContext(Context)
-    const{ships} = application.player
-    // console.log(application)
+    const ships = application.player.ships.filter(s => !s.placed)
+    const{shipPoints} = application.player
+    // const {ships} = application.player
 
     // const ships = [
     //     [{size: 4, direction: 'row'}],
@@ -30,26 +35,14 @@ const PortComponent = ({setIsGame}) => {
 
     return (
         <div className={styles.port}>
-            <ul className={styles.port_lines}>
                 {
                     ships.map((ship, i) =>
-                        <li className={styles.port_line} key={i}>
-                            {
-                                ship.map((s, i) =>
-                                    <div 
-                                        id={`port-${i}`}
-                                        className={styles.port_dock} 
-                                        key={i}
-                                        style={{width: 25 * s.size}}
-                                    >
-                                        <ShipComponent ship={s}/>
-                                    </div>
-                                )
-                            }
-                        </li>     
+                        <ShipComponent ship={ship} key={ship.id}/>
                     )
+                    
                 }
-            </ul>
+
+
             <div className={styles.btn_box}>
                 <Button 
                     // onClick={() => }
@@ -64,7 +57,7 @@ const PortComponent = ({setIsGame}) => {
                     Авто
                 </Button>
                 <Button 
-                    onClick={() => setIsGame(true)}
+                    onClick={() => application.player.shipPoints()}
                     cssStyles={{...cssStyles, fontFamily: '"Caveat", cursive'}}
                 >
                     Далее
@@ -72,6 +65,6 @@ const PortComponent = ({setIsGame}) => {
             </div>
         </div>
     )
-}
+})
 
 export default PortComponent

@@ -2,6 +2,7 @@
     width: 254px;
     height: 254px;
     border: 2px solid transparent;
+    position: relative;
     &_lines{
         height: 80%;
         list-style: none;
@@ -21,8 +22,11 @@
 .btn_box{
     display: flex;
     height: 20%;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
+    position: absolute;
+    bottom: 0;
 }
 
 

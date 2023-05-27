@@ -1,3 +1,4 @@
+import { isUnderPoint } from "../utils/additional"
 import { Board } from "./Board"
 import { Mouse } from "./Mouse"
 
@@ -7,6 +8,7 @@ export class Application {
     mouse = null
     dragetShip = null
     dragetShipDock = null
+    ship = null
     offsetX = null
     offsetY = null
     position = {left: 0, top: 0}
@@ -27,19 +29,19 @@ export class Application {
         this.update()
     }
 
-    setDragetShip(element, parentElement) {
+    setDragetShip(element, parentElement, ship) {
         this.dragetShip = element
         this.dragetShipDock = parentElement
+        this.ship = ship
+        
+        
         if(element) {
             const{left, top} = this.dragetShip.getBoundingClientRect()
             this.offsetX = this.mouse.x - left
             this.offsetY = this.mouse.y - top
-        } else {
-            this.offsetX = null
-            this.offsetY = null
         }
-        console.log(this.offsetX)
-        console.log(this.offsetY)
+        console.log(console.log(this.dragetShipDock))
+        // console.log(this.offsetY)
     }
 
     update() {
@@ -51,7 +53,34 @@ export class Application {
         }
         // Бросаем корабль
         if(this.dragetShip && !this.mouse.left) {
+            const ship = this.dragetShip
+            this.dragetShipDock = null
+            
+            const{left, top} = ship.getBoundingClientRect()
+            const{width, height} = this.player.cells[0].getBoundingClientRect()
+            
+            const point = {
+                x: left + width / 2,
+                y: top + height / 2
+            }
+            
+            const cell = this.player.cells.find((cell) => isUnderPoint(point, cell))
+            // console.log(cell)
+            
+            if(cell) {
+                const x = parseInt(cell.dataset.x)
+                const y = parseInt(cell.dataset.y)
+                this.player.addShip(this.ship, y, x)
+            } else {
+                ship.style.top = this.ship.top
+                ship.style.left = this.ship.left
+            }
+
             this.dragetShip = null
+
+
+
+
         }
     }
 }
