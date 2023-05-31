@@ -1,9 +1,13 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import Button from "../../components/Buttons/Button"
 import { SHIPS_ROUTE } from "../../utils/consts"
 import styles from "./HomePage.module.scss"
 
 const HomePage = () => {
+
+    // const[isOnlineGame, setIsOnlineGame] = useState(false)
+    const navigate = useNavigate()
 
     return (
         <div >
@@ -13,19 +17,19 @@ const HomePage = () => {
                     </h1>
                 </div>
                 <div className={styles.button_box}>
-                    <Link 
+                    <button
                         className={styles.btn}
-                        to={SHIPS_ROUTE}                    
+                        onClick={() => navigate(SHIPS_ROUTE)}
                     >
                         Старт
-                    </Link>
+                    </button>
 
-                    <Link 
+                    <button 
                         className={styles.btn}
-                        to={SHIPS_ROUTE}                    
+                        onClick={() => navigate(SHIPS_ROUTE)}                    
                     >
                         Против игрока
-                    </Link>
+                    </button>
 
                 </div>
         </div>

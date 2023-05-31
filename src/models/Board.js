@@ -1,26 +1,26 @@
 import { COL_MARKERS } from "../utils/consts";
 import { makeAutoObservable } from "mobx";
+import { GameAPI } from "../http/gameAPI";
 
 export class Board {
+    socket = null
     board = []
     cells = []
     shots = []
     ships = [
-        {id: 1, top: '0', left: '0', x: null, y: null, size: 4, direction: 'row', placed: false , moving: false},
-        {id: 2, top: '50px', left: '0', x: null, y: null, size: 3, direction: 'row', placed: false , moving: false},
-        {id: 5, top: '50px', left: '100px', x: null, y: null, size: 3, direction: 'row', placed: false , moving: false},
-        {id: 3, top: '100px', left: '0', x: null, y: null, size: 2, direction: 'row', placed: false , moving: false},
-        {id: 6, top: '100px', left: '75px', x: null, y: null, size: 2, direction: 'row', placed: false , moving: false}, 
-        {id: 8, top: '100px', left: '150px', x: null, y: null, size: 2, direction: 'row', placed: false , moving: false},
-        {id: 7, top: '150px', left: '0px', x: null, y: null, size: 1, direction: 'row', placed: false , moving: false}, 
-        {id: 9, top: '150px', left: '50px', x: null, y: null, size: 1, direction: 'row', placed: false , moving: false}, 
-        {id: 4, top: '150px', left: '100px', x: null, y: null, size: 1, direction: 'row', placed: false , moving: false},
-        {id: 10, top: '150px', left: '150px', x: null, y: null, size: 1, direction: 'row', placed: false , moving: false}
+        {id: 1, top: '0', left: '0', x: null, y: null, size: 4, direction: 'row', placed: false },
+        {id: 2, top: '50px', left: '0', x: null, y: null, size: 3, direction: 'row', placed: false },
+        {id: 5, top: '50px', left: '100px', x: null, y: null, size: 3, direction: 'row', placed: false },
+        {id: 3, top: '100px', left: '0', x: null, y: null, size: 2, direction: 'row', placed: false },
+        {id: 6, top: '100px', left: '75px', x: null, y: null, size: 2, direction: 'row', placed: false }, 
+        {id: 8, top: '100px', left: '150px', x: null, y: null, size: 2, direction: 'row', placed: false },
+        {id: 7, top: '150px', left: '0px', x: null, y: null, size: 1, direction: 'row', placed: false }, 
+        {id: 9, top: '150px', left: '50px', x: null, y: null, size: 1, direction: 'row', placed: false }, 
+        {id: 4, top: '150px', left: '100px', x: null, y: null, size: 1, direction: 'row', placed: false },
+        {id: 10, top: '150px', left: '150px', x: null, y: null, size: 1, direction: 'row', placed: false }
     ]
 
     constructor() {
-        // const board = []
-
         this.createBoard()
         makeAutoObservable(this)
     }
@@ -53,6 +53,7 @@ export class Board {
             }
                                 
         }
+        console.log(board)
         this.board = board
     }
 
@@ -68,7 +69,7 @@ export class Board {
                     placed: true,
                     top: '0',
                     left: '0', 
-                    moving: true,
+                    // moving: true,
                     x,
                     y
                 }
@@ -92,7 +93,7 @@ export class Board {
     }
 
     shipPoints() {
-        const shipPoints = {type: 'Ready', ships: []}
+        const shipPoints = {type: 'UserReady', ships: []}
         this.ships.forEach(s => {
             const points = []
             if(s.placed) {
@@ -133,8 +134,9 @@ export class Board {
 
     }
 
-    addShot() {
-
+    addShot(y, x) {
+        console.log(y, x)
+        this.socket.sendMessage({type: 'Shot', y, x})
     }
 
     removeShot() {
@@ -147,6 +149,10 @@ export class Board {
 
     setDirection() {
 
+    }
+
+    createSocket(roomId) {
+        this.socket = new GameAPI(roomId)
     }
 
 }

@@ -11,7 +11,7 @@ const BoardComponent = observer(() => {
 
     const{application} = useContext(Context)
     const{board} = application.player
-    console.log(board)
+    // console.log(board)
     
 
 

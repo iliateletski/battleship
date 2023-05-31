@@ -8,4 +8,5 @@ export const gameRoutes = [
     {path: HOME_ROUTE, element: <HomePage/>},
     {path: GAME_ROUTE, element: <Game/>},
     {path: SHIPS_ROUTE, element: <PlaceShips/>},
+    {path: `${SHIPS_ROUTE}/:roomId`, element: <PlaceShips/>},
 ]

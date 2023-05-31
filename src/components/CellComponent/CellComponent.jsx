@@ -22,6 +22,7 @@ const CellComponent = ({children, x, y}) => {
                 data-x={x}
                 data-y={y}
                 ref={ref}
+                onClick={(e) => application.player.addShot(e.target.dataset.y, e.target.dataset.x)}
             >
                 {children}
             </div>

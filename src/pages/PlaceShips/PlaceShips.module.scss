@@ -12,3 +12,22 @@
     left: 72px;
     display: flex;
 }
+
+.port_box{
+    width: 254px;
+    height: 254px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.btn_box{
+    display: flex;
+    height: 20%;
+    width: inherit;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+}
+
