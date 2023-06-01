@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import styles from "./PlaceShips.module.scss"
 import BoardComponent from "../../components/BoardComponent/BoardComponent"
 import PortComponent from "../../components/PortComponent/PortComponent"
 import Button from "../../components/Buttons/Button"
-import { HOME_ROUTE, SHIPS_ROUTE } from "../../utils/consts"
+import { HOME_ROUTE, SHIPS_ROUTE, GAME_ROUTE } from "../../utils/consts"
 import { fetchRoomId } from "../../http/gameAPI"
 import { observer } from "mobx-react-lite"
 import { Context } from "../.."
@@ -22,19 +22,20 @@ const PlaceShips = observer(() => {
     }
 
     useEffect(() => {
-        console.log('vasya')
-        if(roomId) {
-            application.player.createSocket(roomId)
-        } else if(!roomId) {
+        if(roomId && application.isOnlineGame) {
+            application.initWebSocket(roomId)
+        } 
+        
+        if(!roomId && application.isOnlineGame) {
             fetchRoomId()
             .then(({data}) => {
                 navigate(`${SHIPS_ROUTE}/${data.roomId}`)
-                application.player.createSocket(data.roomId)
+                application.initWebSocket(data.roomId)
             })
         }
     }, [])
 
-    // console.log(socket)
+    console.log(application.gameStatus)
 
     return (
         <div className={styles.box}>
@@ -51,7 +52,7 @@ const PlaceShips = observer(() => {
                 </Button>
             </div>
             <div className={styles.place_ships}>
-                <BoardComponent/>
+                <BoardComponent isPlayerboard/>
                 <div className={styles.port_box}>
                     <PortComponent />
                     <div className={styles.btn_box}>
@@ -62,7 +63,7 @@ const PlaceShips = observer(() => {
                             cycle
                         </Button>
                         <Button 
-                            onClick={() => navigate()}
+                            onClick={() => application.initWebSocket(roomId)}
                             cssStyles={{...cssStyles, fontFamily: '"Caveat", cursive'}}
                         >
                             Авто
@@ -70,7 +71,8 @@ const PlaceShips = observer(() => {
                         <Button 
                             onClick={() => {
                                 const shipPoints = application.player.shipPoints()
-                                application.player.socket.sendMessage(shipPoints)
+                                application.socket.sendMessage(shipPoints)
+                                navigate(GAME_ROUTE)
                             }}
                             cssStyles={{...cssStyles, fontFamily: '"Caveat", cursive'}}
                         >

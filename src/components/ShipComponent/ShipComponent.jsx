@@ -7,6 +7,7 @@ import shipIcons from "../../images/ship.png"
 const ShipComponent = ({ship}) => {
 
     const{application} = useContext(Context)
+    const{preparation} = application
 
     // console.log(shipIcons)
 
@@ -15,7 +16,7 @@ const ShipComponent = ({ship}) => {
             className={`ship ship_${ship.size}`}
             style={{top: ship.top, left: ship.left}}
             onMouseDown={(e) => {
-                application.setDragetShip(e.target, e.target.parentNode, ship)
+                preparation.setDragetShip(e.target, e.target.parentNode, ship)
             }}
         >
         </div>    

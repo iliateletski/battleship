@@ -1,86 +1,61 @@
+import { GameAPI } from "../http/gameAPI"
 import { isUnderPoint } from "../utils/additional"
 import { Board } from "./Board"
 import { Mouse } from "./Mouse"
+import { Preparation } from "./Preparation"
+import { makeAutoObservable } from "mobx";
 
 export class Application {
-    player = null
-    rival = null
-    mouse = null
-    dragetShip = null
-    dragetShipDock = null
-    ship = null
-    offsetX = null
-    offsetY = null
-    position = {left: 0, top: 0}
-
+    
     constructor() {
-
-        const player = new Board()
-        const rival = new Board()
-        const mouse = new Mouse(document.body)
-
-        Object.assign(this, {player, rival, mouse})
+        this.isOnlineGame = true
+        this.gameStatus = null
+        this.shotResult = null
+        this.isMyMove = false
+        this.win = false
+        this.socket = null
+        this.player = new Board()
+        this.rival = new Board()
+        this.mouse = new Mouse(document.body)
+        this.preparation = new Preparation(this)
         requestAnimationFrame(() => this.tick())
+        makeAutoObservable(this)
     }
 
     tick() {
         requestAnimationFrame(() => this.tick())
         this.mouse.tick()
-        this.update()
+        this.preparation.update()
     }
 
-    setDragetShip(element, parentElement, ship) {
-        this.dragetShip = element
-        this.dragetShipDock = parentElement
-        this.ship = ship
-        
-        
-        if(element) {
-            const{left, top} = this.dragetShip.getBoundingClientRect()
-            this.offsetX = this.mouse.x - left
-            this.offsetY = this.mouse.y - top
-        }
-        console.log(console.log(this.dragetShipDock))
-        // console.log(this.offsetY)
+    initWebSocket(roomId) {
+        this.socket = new GameAPI(roomId, this)
+        console.log(this.socket)
     }
 
-    update() {
-        // Перетаскиваем корабль
-        if(this.dragetShip && this.mouse.left) {
-            const{left, top} = this.dragetShipDock.getBoundingClientRect()
-            this.dragetShip.style.left = `${this.mouse.x - left - this.offsetX}px`
-            this.dragetShip.style.top = `${this.mouse.y - top - this.offsetY}px`
-        }
-        // Бросаем корабль
-        if(this.dragetShip && !this.mouse.left) {
-            const ship = this.dragetShip
-            this.dragetShipDock = null
-            
-            const{left, top} = ship.getBoundingClientRect()
-            const{width, height} = this.player.cells[0].getBoundingClientRect()
-            
-            const point = {
-                x: left + width / 2,
-                y: top + height / 2
-            }
-            
-            const cell = this.player.cells.find((cell) => isUnderPoint(point, cell))
-            // console.log(cell)
-            
-            if(cell) {
-                const x = parseInt(cell.dataset.x)
-                const y = parseInt(cell.dataset.y)
-                this.player.addShip(this.ship, y, x)
-            } else {
-                ship.style.top = this.ship.top
-                ship.style.left = this.ship.left
-            }
-
-            this.dragetShip = null
-
-
-
-
-        }
+    setIsOlineGame(boolean) {
+        this.isOnlineGame = boolean
     }
+
+    setGameStatus(status) {
+        this.gameStatus = status
+        console.log(this.gameStatus)
+    }
+
+    setIsMyMove(boolean) {
+        this.isMyMove = boolean
+        console.log(this.isMyMove)
+    }
+
+    setShotResult(shotResult) {
+        this.shotResult = shotResult
+        console.log(this.shotResult)
+    }
+
+    setWin(boolean) {
+        this.win = boolean
+        console.log(this.win)
+    }
+
+    
 }

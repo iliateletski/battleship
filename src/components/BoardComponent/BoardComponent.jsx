@@ -7,12 +7,12 @@ import { observer } from "mobx-react-lite"
 
 
 
-const BoardComponent = observer(() => {
+const BoardComponent = observer(({isPlayerboard}) => {
 
     const{application} = useContext(Context)
-    const{board} = application.player
+    const{board} = isPlayerboard ? application.player : application.rival
     // console.log(board)
-    
+    console.log(isPlayerboard)
 
 
     

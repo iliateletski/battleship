@@ -3,7 +3,6 @@ import { makeAutoObservable } from "mobx";
 import { GameAPI } from "../http/gameAPI";
 
 export class Board {
-    socket = null
     board = []
     cells = []
     shots = []
@@ -136,7 +135,6 @@ export class Board {
 
     addShot(y, x) {
         console.log(y, x)
-        this.socket.sendMessage({type: 'Shot', y, x})
     }
 
     removeShot() {
@@ -145,14 +143,6 @@ export class Board {
 
     removeAllShot() {
 
-    }
-
-    setDirection() {
-
-    }
-
-    createSocket(roomId) {
-        this.socket = new GameAPI(roomId)
     }
 
 }

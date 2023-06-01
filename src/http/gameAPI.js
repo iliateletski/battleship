@@ -6,13 +6,13 @@ export const fetchRoomId = async () => {
     return response
 }
 
-
-
 export class GameAPI {
     socket = null
+    app = null
     
-    constructor(roomId) {
+    constructor(roomId, app) {
         this.createWebSocket(roomId)
+        this.app = app
     }
 
     async createWebSocket(roomId) {
@@ -27,11 +27,31 @@ export class GameAPI {
 
         this.socket = socket
 
-        this.socket.onopen = (e) => console.log(e)
-        this.socket.onmessage = (e) => console.log(JSON.parse(e.data))
-        this.socket.onerror = (e) => console.log(e)
-    }
+        this.socket.onopen = (e) => {
+            console.log(e)
+        }
+        this.socket.onmessage = (e) => {
+            const message = JSON.parse(e.data)
+            const{type} = message
 
+            switch(type) {
+                case 'WaitForSecondPlayer': this.app.setGameStatus(type); break
+                case 'StartGame': this.app.setGameStatus(type); break
+                case 'SetShips': this.app.setGameStatus(type); break
+                case 'YourMove' : this.app.setIsMyMove(true); break
+                case 'ShotResult' : this.app.setShotResult(message); break
+                case 'EndGame': 
+                    this.app.setGameStatus(type)
+                    this.app.setWin(message.win)    
+                break
+
+            }
+
+        }
+        this.socket.onerror = (e) => {
+            console.log(e)
+        }
+    }
 
     sendMessage(body) {
         const data = JSON.stringify(body)
