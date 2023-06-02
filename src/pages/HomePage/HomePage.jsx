@@ -23,7 +23,7 @@ const HomePage = observer(() => {
                         className={styles.btn}
                         onClick={() => {
                             navigate(SHIPS_ROUTE)
-                            application.setIsOlineGame(false)
+                            application.game.setIsOlineGame(false)
                         }}
                     >
                         С ботом

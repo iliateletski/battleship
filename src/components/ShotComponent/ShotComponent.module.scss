@@ -1,0 +1,16 @@
+.shot_box{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    color: red;
+    font-size: 25px;
+    padding: 0 5px;
+}
+
+.miss{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 1px;
+}

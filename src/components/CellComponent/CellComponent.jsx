@@ -20,8 +20,9 @@ const CellComponent = ({children, x, y}) => {
                 className={styles.cell_content}
                 data-x={x}
                 data-y={y}
+                data-cell={true}
                 ref={ref}
-                onClick={(e) => application.socket.sendMessage({type: 'Shot', y: e.target.dataset.y, x: e.target.dataset.x})}
+                // onClick={(e) => application.socket.sendMessage({type: 'Shot', y: e.target.dataset.y, x: e.target.dataset.x})}
             >
                 {children}
             </div>

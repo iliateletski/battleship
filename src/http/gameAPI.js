@@ -36,10 +36,20 @@ export class GameAPI {
 
             switch(type) {
                 case 'WaitForSecondPlayer': this.app.setGameStatus(type); break
-                case 'StartGame': this.app.setGameStatus(type); break
                 case 'SetShips': this.app.setGameStatus(type); break
+                case 'StartGame': this.app.setGameStatus(type); break
                 case 'YourMove' : this.app.setIsMyMove(true); break
-                case 'ShotResult' : this.app.setShotResult(message); break
+                case 'ShotResult' : 
+                    this.app.setShotResult(message)
+                    this.app.isMyMove
+                    ? this.app.rival.addShot(message) 
+                    : this.app.player.addShot(message)
+
+                    if(this.app.isMyMove && !message.hit) {
+                        this.app.setIsMyMove(false)
+                    }
+                break
+
                 case 'EndGame': 
                     this.app.setGameStatus(type)
                     this.app.setWin(message.win)    
@@ -54,7 +64,6 @@ export class GameAPI {
     }
 
     sendMessage(body) {
-        const data = JSON.stringify(body)
-        this.socket.send(data)
+        this.socket.send(JSON.stringify(body))
     }
 }

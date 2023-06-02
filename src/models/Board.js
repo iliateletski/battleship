@@ -5,7 +5,7 @@ import { GameAPI } from "../http/gameAPI";
 export class Board {
     board = []
     cells = []
-    shots = []
+    shots = new Map()
     ships = [
         {id: 1, top: '0', left: '0', x: null, y: null, size: 4, direction: 'row', placed: false },
         {id: 2, top: '50px', left: '0', x: null, y: null, size: 3, direction: 'row', placed: false },
@@ -30,7 +30,7 @@ export class Board {
         for(let y = 0; y < 10; y++) {
             const row = []
             for(let x = 0; x < 10; x++) {
-                const cell = {x, y, ship: null, free: true}
+                const cell = {x, y, ship: null, free: true, shot: null}
                 row.push(cell) 
             }  
             board.push(row) 
@@ -49,10 +49,15 @@ export class Board {
 
             for(let i = 0; i < ship.size; i++) {
                 board[y][x + i].free = false
-            }
-                                
+            }                 
         }
-        console.log(board)
+
+        for(const shot of this.shots.values()) {
+            const{y, x} = shot
+            board[y][x].shot = shot
+        }
+
+        // console.log(board)
         this.board = board
     }
 
@@ -133,8 +138,12 @@ export class Board {
 
     }
 
-    addShot(y, x) {
-        console.log(y, x)
+    addShot(shotResult) {
+        console.log(shotResult)
+        const key = `y${shotResult.y}x${shotResult.x}`
+        this.shots.set(key, shotResult)
+        this.createBoard()
+        console.log(key)
     }
 
     removeShot() {

@@ -4,6 +4,7 @@ import { Board } from "./Board"
 import { Mouse } from "./Mouse"
 import { Preparation } from "./Preparation"
 import { makeAutoObservable } from "mobx";
+import { Game } from "./Game"
 
 export class Application {
     
@@ -18,6 +19,7 @@ export class Application {
         this.rival = new Board()
         this.mouse = new Mouse(document.body)
         this.preparation = new Preparation(this)
+        this.game = new Game(this) 
         requestAnimationFrame(() => this.tick())
         makeAutoObservable(this)
     }
@@ -49,7 +51,7 @@ export class Application {
 
     setShotResult(shotResult) {
         this.shotResult = shotResult
-        console.log(this.shotResult)
+        // console.log(this.shotResult)
     }
 
     setWin(boolean) {

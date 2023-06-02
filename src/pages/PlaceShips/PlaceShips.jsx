@@ -35,8 +35,6 @@ const PlaceShips = observer(() => {
         }
     }, [])
 
-    console.log(application.gameStatus)
-
     return (
         <div className={styles.box}>
             <div className={styles.header}>
