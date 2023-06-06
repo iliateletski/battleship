@@ -30,40 +30,54 @@ export class GameAPI {
         this.socket.onopen = (e) => {
             console.log(e)
         }
-        this.socket.onmessage = (e) => {
-            const message = JSON.parse(e.data)
-            const{type} = message
+        this.socket.onmessage = (e) => this.handlerMessage(e)
 
-            switch(type) {
-                case 'WaitForSecondPlayer': this.app.setGameStatus(type); break
-                case 'SetShips': this.app.setGameStatus(type); break
-                case 'StartGame': this.app.setGameStatus(type); break
-                case 'YourMove' : this.app.setIsMyMove(true); break
-                case 'ShotResult' : 
-                    this.app.setShotResult(message)
-                    this.app.isMyMove
-                    ? this.app.rival.addShot(message) 
-                    : this.app.player.addShot(message)
-
-                    if(this.app.isMyMove && !message.hit) {
-                        this.app.setIsMyMove(false)
-                    }
-                break
-
-                case 'EndGame': 
-                    this.app.setGameStatus(type)
-                    this.app.setWin(message.win)    
-                break
-
-            }
-
-        }
         this.socket.onerror = (e) => {
             console.log(e)
+        }
+
+        this.socket.onclose = (e) => this.handlerClose(e)
+    }
+
+    handlerMessage(e) {
+        const message = JSON.parse(e.data)
+        const{type} = message
+        console.log(message)
+
+        if(type === 'WaitForSecondPlayer'|| type === 'SetShips' || type === 'StartGame' || type === 'Disconnected') {
+            this.app.game.setGameStatus(type)
+        }
+
+        if(type === 'YourMove') {
+            this.app.game.setIsPlayerMove(true)
+        }
+
+        if(type === 'ShotResult') {
+            this.app.game.isPlayerMove
+            ? this.app.rival.addShot(message) 
+            : this.app.player.addShot(message)
+
+            if(this.app.game.isPlayerMove && !message.hit) {
+                this.app.game.setIsPlayerMove(false)
+            } 
+        }
+
+        if(type === 'EndGame') {
+            this.app.game.setGameStatus(type)
+            this.app.game.setWin(message.win)
         }
     }
 
     sendMessage(body) {
         this.socket.send(JSON.stringify(body))
+    }
+    
+    handlerClose(e) {
+        console.log(e)
+    }
+
+
+    closeConnection() {
+        this.socket.close()
     }
 }

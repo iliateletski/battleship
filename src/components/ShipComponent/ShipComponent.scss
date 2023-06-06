@@ -6,14 +6,31 @@
     z-index: 2;
     &_1{
         width: 25px;
+        &_column{
+            transform: rotate(90deg);
+        }
     }
     &_2{
         width: 50px;
+        &_column{
+            transform: rotate(90deg) translate(12px, 12px);
+        }
     }
     &_3{
         width: 75px;
+        &_column{
+           transform: rotate(90deg) translate(25px, 24px); 
+        }
     }
     &_4{
         width: 100px;
+        background-image: url(../../images/ship_4.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border: none;
+        &_column{
+           transform: rotate(90deg) translate(37px, 37px);
+        }
     }
 }

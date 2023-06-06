@@ -14,6 +14,7 @@ const PlaceShips = observer(() => {
     const navigate = useNavigate()
     const {roomId} = useParams()
     const{application} = useContext(Context)
+    const{game}= application
     const cssStyles = {
         border: '2px solid',
         fontSize: '28px',
@@ -22,11 +23,16 @@ const PlaceShips = observer(() => {
     }
 
     useEffect(() => {
-        if(roomId && application.isOnlineGame) {
+
+        // if(game.isOnlineGame && !game.gameStatus) {
+        //     game.isOnlineGame.se
+        // }
+
+        if(roomId && application.game.isOnlineGame) {
             application.initWebSocket(roomId)
-        } 
+        }
         
-        if(!roomId && application.isOnlineGame) {
+        if(!roomId && application.game.isOnlineGame) {
             fetchRoomId()
             .then(({data}) => {
                 navigate(`${SHIPS_ROUTE}/${data.roomId}`)
@@ -55,8 +61,8 @@ const PlaceShips = observer(() => {
                     <PortComponent />
                     <div className={styles.btn_box}>
                         <Button 
-                            // onClick={() => }
                             cssStyles={cssStyles}
+                            onClick={() => application.preparation.rotateShip()}
                         >
                             cycle
                         </Button>

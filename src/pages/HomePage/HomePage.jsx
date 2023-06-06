@@ -22,8 +22,8 @@ const HomePage = observer(() => {
                     <button
                         className={styles.btn}
                         onClick={() => {
-                            navigate(SHIPS_ROUTE)
                             application.game.setIsOlineGame(false)
+                            navigate(SHIPS_ROUTE)
                         }}
                     >
                         С ботом
@@ -32,8 +32,8 @@ const HomePage = observer(() => {
                     <button 
                         className={styles.btn}
                         onClick={() => {
+                            application.game.setIsOlineGame(true)
                             navigate(SHIPS_ROUTE)
-                            application.setIsOlineGame(true)
                         }}                    
                     >
                         С другом

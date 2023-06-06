@@ -1,23 +1,13 @@
 import { COL_MARKERS } from "../utils/consts";
 import { makeAutoObservable } from "mobx";
-import { GameAPI } from "../http/gameAPI";
+import { inField, changeCellState } from "../utils/additional";
+
 
 export class Board {
     board = []
     cells = []
     shots = new Map()
-    ships = [
-        {id: 1, top: '0', left: '0', x: null, y: null, size: 4, direction: 'row', placed: false },
-        {id: 2, top: '50px', left: '0', x: null, y: null, size: 3, direction: 'row', placed: false },
-        {id: 5, top: '50px', left: '100px', x: null, y: null, size: 3, direction: 'row', placed: false },
-        {id: 3, top: '100px', left: '0', x: null, y: null, size: 2, direction: 'row', placed: false },
-        {id: 6, top: '100px', left: '75px', x: null, y: null, size: 2, direction: 'row', placed: false }, 
-        {id: 8, top: '100px', left: '150px', x: null, y: null, size: 2, direction: 'row', placed: false },
-        {id: 7, top: '150px', left: '0px', x: null, y: null, size: 1, direction: 'row', placed: false }, 
-        {id: 9, top: '150px', left: '50px', x: null, y: null, size: 1, direction: 'row', placed: false }, 
-        {id: 4, top: '150px', left: '100px', x: null, y: null, size: 1, direction: 'row', placed: false },
-        {id: 10, top: '150px', left: '150px', x: null, y: null, size: 1, direction: 'row', placed: false }
-    ]
+    ships = []
 
     constructor() {
         this.createBoard()
@@ -43,13 +33,14 @@ export class Board {
 
         for(const ship of this.ships) {
             if(!ship.placed) continue
-            
             const{y, x} = ship
-            board[y][x].ship = {...ship, left: '0', top: '0'}
+            board[y][x].ship = ship
 
-            for(let i = 0; i < ship.size; i++) {
-                board[y][x + i].free = false
-            }                 
+            if(ship.moving) {
+                ship.moving = false
+                continue
+            }
+            changeCellState(board, ship, false)
         }
 
         for(const shot of this.shots.values()) {
@@ -57,43 +48,42 @@ export class Board {
             board[y][x].shot = shot
         }
 
-        // console.log(board)
+        console.log(board)
         this.board = board
+        console.log(this.ships)
     }
 
     addShip(ship, y, x) {
-        
+
+        if(!this.ships.includes(ship)) {
+            this.ships.push(ship)
+        } 
+
         if(ship.placed) this.removeShip(ship)
         
+        if(inField(y, x)) {
 
-        if(this.inField(y, x)) {
-            if(ship.direction = 'row') {
-                this.board[y][x].ship = {
-                    ...ship,
-                    placed: true,
-                    top: '0',
-                    left: '0', 
-                    // moving: true,
-                    x,
-                    y
-                }
-                for(let i = 0; i < ship.size; i++) {
-                    this.board[y][x + i].free = false
-                }
-            }
+            const dRow = ship.direction ==='row'
+            const dColumn = ship.direction ==='column'
             
-            this.ships = this.ships.map(s => {
-                return (
-                    s.id !== ship.id 
-                    ? s 
-                    : {...s, placed: true, x, y}
-                )
+            for(let i = 0; i < ship.size; i++) {
+                const dx =  x + dRow * i
+                const dy = y + dColumn * i
 
-            })
+                if(!inField(dy, dx) || !this.board[dy][dx].free) {
+                    ship.placed
+                    ? ship.setPosition('0', '0')
+                    : ship.setPosition(ship.startLeft, ship.startTop)
+                    this.createBoard()
+                    return false
+                }
+            }  
+            
+            Object.assign(ship, {placed: true, moving: false, x, y, left: '0', top: '0'})
+            this.createBoard()
         }
         console.log(this.ships)
-
-        this.createBoard()
+        return true
     }
 
     shipPoints() {
@@ -113,25 +103,36 @@ export class Board {
 
     setCells(cell) {
         this.cells = [...this.cells, cell]
-        // console.log(this.cells)
     }
-
-    inField(y, x) {
-        if(!Number.isInteger(x) || !Number.isInteger(y)) {
-            return false
-        }
-        return x >= 0 && x < 10 && y >= 0 && y < 10
-    }
-
+    
     removeShip(ship) {
+        console.log('remove')
+        Object.assign(ship, {moving: true})
+        this.createBoard()
+    }
+
+    rotateShip(ship) {
+        if(!ship.placed) return false
+
         const{x, y} = ship
-        this.board[y][x].ship = null
-        this.ships = this.ships.map(s => {
-            return (
-            s.id === ship.id 
-            ? {...s, placed: false, x: null, y: null}
-            : s 
-        )})
+        const newDirection = ship.direction === 'row' ? 'column' : 'row'
+
+        const dRow = newDirection ==='row'
+        const dColumn = newDirection ==='column'
+        
+        for(let i = 2; i < ship.size; i++) {
+            const dx =  x + dRow * i
+            const dy = y + dColumn * i
+
+            if(!inField(dy, dx)) return false
+            if(!this.board[dy][dx].free) {
+                this.createBoard()
+                return false 
+            }
+        } 
+
+        Object.assign(ship, {direction: newDirection})
+        this.createBoard()
     }
 
     removeAllShip() {

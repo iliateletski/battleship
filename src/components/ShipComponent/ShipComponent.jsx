@@ -1,26 +1,29 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
 import { Context } from "../.."
 import "./ShipComponent.scss"
-import { observer } from "mobx-react-lite"
-import shipIcons from "../../images/ship.png" 
+import { observer } from "mobx-react-lite" 
+import ship_4 from "../../images/ship_4.svg"
+import { set } from "mobx"
 
-const ShipComponent = ({ship}) => {
+const ShipComponent = observer(({ship}) => {
 
     const{application} = useContext(Context)
     const{preparation} = application
-
-    // console.log(shipIcons)
+    const styles =['ship',`ship_${ship.size}`, `ship_${ship.size}_${ship.direction}`]
+    // if(ship.direction === 'col') styles.push(`ship_${ship.size}_${ship.direction}`)
+    console.log('перерендер')
 
     return (
         <div 
-            className={`ship ship_${ship.size}`}
-            style={{top: ship.top, left: ship.left}}
+            className={styles.join(' ')}
+            style={{left: ship.left, top: ship.top}}
             onMouseDown={(e) => {
                 preparation.setDragetShip(e.target, e.target.parentNode, ship)
             }}
+            // onClick={() => application.player.rotateShip(ship)}
         >
         </div>    
     )
-}
+})
 
 export default ShipComponent

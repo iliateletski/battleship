@@ -2,10 +2,9 @@ import { makeAutoObservable } from "mobx";
 
 export class Game {
     isOnlineGame = true
-    gameStatus = 'StartGame'
-    shotResult = null
-    isPlayerMove = true
+    isPlayerMove = false
     win = false
+    gameStatus = ''
     
     constructor(app) {
         this.app = app
@@ -36,11 +35,6 @@ export class Game {
     setIsPlayerMove(boolean) {
         this.isPlayerMove = boolean
         console.log(this.isPlayerMove)
-    }
-
-    setShotResult(shotResult) {
-        this.shotResult = shotResult
-        console.log(this.shotResult)
     }
 
     setWin(boolean) {

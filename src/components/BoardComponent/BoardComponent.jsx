@@ -13,7 +13,7 @@ const BoardComponent = observer(({isPlayerboard}) => {
     const{application} = useContext(Context)
     const{board} = isPlayerboard ? application.player : application.rival
     // console.log(board)
-    console.log(board)
+    console.log('доска')
 
 
     

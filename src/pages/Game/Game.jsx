@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../..";
 import BoardComponent from "../../components/BoardComponent/BoardComponent";
@@ -10,8 +10,9 @@ import styles from "./Game.module.scss"
 const Game = observer(() => {
 
     const{application} = useContext(Context)
+    const{game} = application
     const navigate = useNavigate()
-    console.log(application)
+    // console.log(application)
 
     return (
         <div className={styles.box}>
@@ -26,6 +27,10 @@ const Game = observer(() => {
                 >
                     cottage
                 </Button>
+                {
+                    game.gameStatus !== 'StartGame' && <div className={styles.message}>Ожидание соперника ...</div>
+                }
+                
             </div>
             <div className={styles.battlefield}>
                 <BoardComponent isPlayerboard/>
