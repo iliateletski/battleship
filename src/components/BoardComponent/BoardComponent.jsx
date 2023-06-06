@@ -29,6 +29,7 @@ const BoardComponent = observer(({isPlayerboard}) => {
                                         key={x}
                                         x={cell.x}
                                         y={cell.y}
+                                        cell={cell}
                                     > 
                                         {
                                             cell.colMarker  && <div className={[styles.marker_col, styles.marker].join(' ')}>{cell.colMarker}</div>

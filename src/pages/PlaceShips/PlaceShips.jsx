@@ -23,11 +23,6 @@ const PlaceShips = observer(() => {
     }
 
     useEffect(() => {
-
-        // if(game.isOnlineGame && !game.gameStatus) {
-        //     game.isOnlineGame.se
-        // }
-
         if(roomId && application.game.isOnlineGame) {
             application.initWebSocket(roomId)
         }

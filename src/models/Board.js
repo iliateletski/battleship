@@ -20,7 +20,7 @@ export class Board {
         for(let y = 0; y < 10; y++) {
             const row = []
             for(let x = 0; x < 10; x++) {
-                const cell = {x, y, ship: null, free: true, shot: null}
+                const cell = {x, y, ship: null, free: true, shot: null, placedMarker: null}
                 row.push(cell) 
             }  
             board.push(row) 
@@ -37,7 +37,7 @@ export class Board {
             board[y][x].ship = ship
 
             if(ship.moving) {
-                ship.moving = false
+                // ship.moving = false
                 continue
             }
             changeCellState(board, ship, false)
@@ -74,6 +74,7 @@ export class Board {
                     ship.placed
                     ? ship.setPosition('0', '0')
                     : ship.setPosition(ship.startLeft, ship.startTop)
+                    ship.moving = false
                     this.createBoard()
                     return false
                 }
@@ -108,7 +109,7 @@ export class Board {
     removeShip(ship) {
         console.log('remove')
         Object.assign(ship, {moving: true})
-        this.createBoard()
+        this.createBoard() 
     }
 
     rotateShip(ship) {

@@ -10,8 +10,6 @@ const ShipComponent = observer(({ship}) => {
     const{application} = useContext(Context)
     const{preparation} = application
     const styles =['ship',`ship_${ship.size}`, `ship_${ship.size}_${ship.direction}`]
-    // if(ship.direction === 'col') styles.push(`ship_${ship.size}_${ship.direction}`)
-    console.log('перерендер')
 
     return (
         <div 
@@ -20,7 +18,6 @@ const ShipComponent = observer(({ship}) => {
             onMouseDown={(e) => {
                 preparation.setDragetShip(e.target, e.target.parentNode, ship)
             }}
-            // onClick={() => application.player.rotateShip(ship)}
         >
         </div>    
     )
