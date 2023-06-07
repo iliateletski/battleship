@@ -4,9 +4,6 @@ import styles from "./BoardComponent.module.scss"
 import { Context } from "../.."
 import ShipComponent from "../ShipComponent/ShipComponent"
 import { observer } from "mobx-react-lite"
-import ShotComponent from "../ShotComponent/ShotComponent"
-
-
 
 const BoardComponent = observer(({isPlayerboard}) => {
 
@@ -40,9 +37,7 @@ const BoardComponent = observer(({isPlayerboard}) => {
                                         {
                                             cell.ship && <ShipComponent ship={cell.ship}/>
                                         }
-                                        {
-                                            cell.shot && <ShotComponent hit={cell.shot.hit}/>
-                                        }
+                                        
                                     </CellComponent>
                                 )
                             }

@@ -73,9 +73,9 @@ export class GameAPI {
     }
     
     handlerClose(e) {
-        console.log(e)
+        this.app.game.setGameStatus(e.type)
+        console.log(e.type)
     }
-
 
     closeConnection() {
         this.socket.close()

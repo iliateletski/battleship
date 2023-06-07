@@ -17,3 +17,5 @@ export const ships = [
     {id: 4, startTop: '150px', startLeft: '100px', size: 1, direction: 'row'},
     {id: 10, startTop: '150px', startLeft: '150px', size: 1, direction: 'row'}
 ]
+
+// export const colorMiss = 

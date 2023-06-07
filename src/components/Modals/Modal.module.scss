@@ -1,0 +1,52 @@
+.overlay{
+    width: 100%;
+    height: 100%;
+    background-color: #00000059;;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+}
+
+.modal{
+    width: 57%;
+    height: 39%;
+    background: linear-gradient(#bbb, transparent 1px), linear-gradient(90deg, #bbb, #fff 1px);
+    background-size: 25px 25px;
+    background-position: center center;
+    border-radius: 15px;
+    padding: 10px;
+
+    &_inner{
+        height: 100%;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    &_body {
+        
+    }
+
+    &_content{
+        text-align: center;
+        line-height: 26px;
+        font-size: 32px;
+        font-weight: 400;
+        padding: 13px;
+    }
+
+    &_footer{
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &_btn{
+        padding: 5px 30px;
+        font-size: 24px;
+    }
+}
+
+

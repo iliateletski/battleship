@@ -5,6 +5,8 @@ import Button from "../../components/Buttons/Button"
 import { SHIPS_ROUTE } from "../../utils/consts"
 import styles from "./HomePage.module.scss"
 import { observer } from "mobx-react-lite"
+import Container from "../../components/Container/Container"
+
 
 const HomePage = observer(() => {
 
@@ -12,7 +14,8 @@ const HomePage = observer(() => {
     const{application} = useContext(Context)
 
     return (
-        <div >
+        <Container>
+            <div >
                 <div className={styles.header}>
                     <h1 className={styles.title}>
                         Морской бой
@@ -40,7 +43,9 @@ const HomePage = observer(() => {
                     </button>
 
                 </div>
-        </div>
+            </div>
+        </Container>
+        
     )
 })
 

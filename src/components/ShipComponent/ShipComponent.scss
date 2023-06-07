@@ -13,13 +13,13 @@
     &_2{
         width: 50px;
         &_column{
-            transform: rotate(90deg) translate(12px, 12px);
+            transform: rotate(90deg) translate(12px, 13px);
         }
     }
     &_3{
         width: 75px;
         &_column{
-           transform: rotate(90deg) translate(25px, 24px); 
+           transform: rotate(90deg) translate(25px, 25px); 
         }
     }
     &_4{
@@ -30,7 +30,7 @@
         background-size: cover;
         border: none;
         &_column{
-           transform: rotate(90deg) translate(37px, 37px);
+           transform: rotate(90deg) translate(37px, 38px);
         }
     }
 }

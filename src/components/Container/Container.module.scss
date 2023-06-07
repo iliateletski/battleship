@@ -1,0 +1,12 @@
+.container {
+    background: 
+      linear-gradient(180deg, transparent 81px, #ED82AD 81px, #ED82AD 84px, transparent 84px),
+      linear-gradient(lightsteelblue, transparent 1px), 
+      linear-gradient(90deg, LightSteelBlue, #fff 1px);
+    background-size: 100% 100%, 25px 25px, 25px 25px;
+    background-position: 0 20px, -1px -1px, -1px 1px;
+    width: 1000px;
+    height: 575px;
+    margin: 0 auto;
+    position: relative;
+  }
