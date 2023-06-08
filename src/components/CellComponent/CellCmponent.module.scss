@@ -1,5 +1,5 @@
 .cell{
-    width: 24px;
+    width: 10%;
     height: 100%;
     align-items: center;
 
@@ -8,21 +8,24 @@
         width: 100%;
         height: 100%;
     }
-    & + .cell {
-        margin-left: 1px;
-    }
 }
 
-.marker{
-    &_green{
-        background: url(../../images/green_rectangle.svg)
-    }    
-    &_red{
-        background: url(../../images/red_rectangle.svg)
-    }    
-    &_blue{
-        background: url(../../images/blue_rectangle.svg)
-    }    
+.marker_green{
+    background: url(../../images/green_rectangle.svg);
+}
+
+.marker_red{
+    background: url(../../images/red_rectangle.svg);
+}
+
+.marker_blue{
+    background: url(../../images/blue_rectangle.svg);
+}
+
+.marker{   
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: -1px -1px;
 }
 
 .miss{

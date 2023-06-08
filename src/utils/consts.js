@@ -18,4 +18,8 @@ export const ships = [
     {id: 10, startTop: '150px', startLeft: '150px', size: 1, direction: 'row'}
 ]
 
-// export const colorMiss = 
+export const markerColors = {
+    red: '#ED1414',
+    green: '#2DBE45',
+    blue: '#3355AA'
+}

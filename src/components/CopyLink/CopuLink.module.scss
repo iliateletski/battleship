@@ -1,0 +1,36 @@
+.box{
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    border: 2px solid;
+    border-radius: 2px;
+    /* height: 25px; */
+    position: absolute;
+    bottom: 100px;
+    left: 73px;
+    padding: 10px 5px;
+}
+
+.url{
+    font-size: 22px;
+    font-weight: 400;
+    background: transparent;
+    border: none;
+    width: 530px;
+    margin-right: 10px;
+}
+
+.copy_btn{
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+.icon_box{
+    display: inline-flex;
+}
+
+.icon{
+    fill: #3355aa;
+}

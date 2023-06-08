@@ -3,12 +3,12 @@ import React, { useContext, useEffect, useRef } from "react"
 import { Context } from "../.."
 import styles from "./CellCmponent.module.scss"
 
-const CellComponent = observer(({cell, children, x, y}) => {
+const CellComponent = observer(({cell, children}) => {
     
-    const{shot, placedMarker} = cell
+    const{shot, placedMarker, y, x} = cell
     const{application} = useContext(Context)
     const ref = useRef(null)
-    const cssStyles = [styles.cell_content]
+    const cssStyles = [styles.cell_content, styles.marker]
 
     if(placedMarker === 'red') {
         cssStyles.push(styles.marker_red)

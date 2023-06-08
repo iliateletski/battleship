@@ -29,13 +29,16 @@ const BoardComponent = observer(({isPlayerboard}) => {
                                         cell={cell}
                                     > 
                                         {
-                                            cell.colMarker  && <div className={[styles.marker_col, styles.marker].join(' ')}>{cell.colMarker}</div>
+                                            cell.colMarker  && 
+                                            <div className={[styles.marker_col, styles.marker].join(' ')}>{cell.colMarker}</div>
                                         }
                                         {
-                                            cell.rowMarker && <div className={[styles.marker_row, styles.marker].join(' ')}>{cell.rowMarker}</div>
+                                            cell.rowMarker && 
+                                            <div className={[styles.marker_row, styles.marker].join(' ')}>{cell.rowMarker}</div>
                                         }
                                         {
-                                            cell.ship && <ShipComponent ship={cell.ship}/>
+                                            cell.ship && 
+                                            <ShipComponent ship={cell.ship}/>
                                         }
                                         
                                     </CellComponent>

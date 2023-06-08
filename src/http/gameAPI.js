@@ -69,6 +69,7 @@ export class GameAPI {
     }
 
     sendMessage(body) {
+        console.log(body)
         this.socket.send(JSON.stringify(body))
     }
     
