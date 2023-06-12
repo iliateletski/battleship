@@ -1,12 +1,4 @@
-import { host } from "."
-
-export const fetchRoomId = async () => {
-    const response = await host.post('/start')
-    console.log(response)
-    return response
-}
-
-export class GameAPI {
+export class WebSocketAPI {
     socket = null
     app = null
     
@@ -16,19 +8,12 @@ export class GameAPI {
     }
 
     async createWebSocket(roomId) {
-        let socket
-
-        if(roomId) {
-            socket = new WebSocket(`${process.env.REACT_APP_WEBSOCKET_URL}/${roomId}`)
-        } else {
-            const{data} = await fetchRoomId() 
-            socket = new WebSocket(`${process.env.REACT_APP_WEBSOCKET_URL}/${data.roomId}`)
-        }
+        const socket = new WebSocket(`${process.env.REACT_APP_WEBSOCKET_URL}/${roomId}`) 
 
         this.socket = socket
 
         this.socket.onopen = (e) => {
-            console.log(e)
+            console.log(socket.readyState)
         }
         this.socket.onmessage = (e) => this.handlerMessage(e)
 
@@ -44,8 +29,12 @@ export class GameAPI {
         const{type} = message
         console.log(message)
 
-        if(type === 'WaitForSecondPlayer'|| type === 'SetShips' || type === 'StartGame' || type === 'Disconnected') {
+        if(type === 'WaitForSecondPlayer'|| type === 'SetShips' || type === 'StartGame') {
             this.app.game.setGameStatus(type)
+        }
+
+        if(type === 'Disconnected') {
+            this.closeConnection()
         }
 
         if(type === 'YourMove') {
@@ -66,6 +55,7 @@ export class GameAPI {
             this.app.game.setGameStatus(type)
             this.app.game.setWin(message.win)
         }
+        console.log(this.socket.readyState)
     }
 
     sendMessage(body) {
@@ -75,10 +65,11 @@ export class GameAPI {
     
     handlerClose(e) {
         this.app.game.setGameStatus(e.type)
-        console.log(e.type)
+        console.log(this.socket.readyState)
     }
 
     closeConnection() {
         this.socket.close()
+        console.log(this.socket.readyState)
     }
 }

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { HOME_ROUTE } from "../../utils/consts";
-import Button from "../Buttons/Button";
-import ExitGameModal from "../Modals/ExitGameModal";
+import React, { useState } from "react"
+import { useLocation } from "react-router-dom"
+import { HOME_ROUTE } from "../../utils/consts"
+import Button from "../Buttons/Button"
+import ExitGameModal from "../Modals/ExitGameModal"
 import styles from "./Container.module.scss"
 
 const Container = ({children}) => {

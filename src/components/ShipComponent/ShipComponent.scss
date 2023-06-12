@@ -34,3 +34,22 @@
         }
     }
 }
+
+.animation{
+    animation-name: no-placed;
+    animation-duration: 0.3s;
+    animation-iteration-count: 3;
+}
+
+@keyframes no-placed {
+    from{
+        filter: opacity(0.5);
+    }
+
+    to{
+        filter: opacity(1);
+    }
+}
+
+
+

@@ -1,19 +1,15 @@
-import React, { useContext } from "react"
+import React from "react"
 import CellComponent from "../CellComponent/CellComponent"
 import styles from "./BoardComponent.module.scss"
-import { Context } from "../.."
 import ShipComponent from "../ShipComponent/ShipComponent"
 import { observer } from "mobx-react-lite"
+import { useAppContext } from "../../hook/useAppContext"
 
 const BoardComponent = observer(({isPlayerboard}) => {
 
-    const{application} = useContext(Context)
+    const{application} = useAppContext()
     const{board} = isPlayerboard ? application.player : application.rival
-    // console.log(board)
-    console.log('доска')
 
-
-    
     return (
         <div className={styles.board_box}>
             <div className={styles.board}>

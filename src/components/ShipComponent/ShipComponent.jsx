@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useRef, useState } from "react"
-import { Context } from "../.."
+import React from "react"
 import "./ShipComponent.scss"
 import { observer } from "mobx-react-lite" 
-import ship_4 from "../../images/ship_4.svg"
-import { set } from "mobx"
+import { useAppContext } from "../../hook/useAppContext"
 
-const ShipComponent = observer(({ship}) => {
+const ShipComponent = observer(({ship, animation}) => {
 
-    const{application} = useContext(Context)
+    const{application} = useAppContext()
     const{preparation} = application
     const styles =['ship',`ship_${ship.size}`, `ship_${ship.size}_${ship.direction}`]
+    animation && styles.push('animation')
 
     return (
         <div 

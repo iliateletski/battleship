@@ -25,3 +25,24 @@ export const changeCellState = (board, ship, boolean) => {
         }   
     }
 }
+
+export const addEventListeners = (element, type, callback) => {
+    element.addEventListener(type, callback)
+    return () => element.removeEventListener(type, callback)
+}
+
+export const shipIteration = (callback, ship, {newDirection = '', y = null, x = null, count = 0}) => {
+
+    const dRow = newDirection ? newDirection ==='row' : ship.direction === 'row'
+    const dColumn = newDirection ? newDirection ==='column' : ship.direction === 'column'
+    
+    const currentX = x != null ? x : ship.x
+    const currentY = y != null ? y : ship.y
+    
+    for(let i = count; i < ship.size; i++) {
+        const dx = currentX + dRow * i
+        const dy = currentY + dColumn * i
+        if(!callback(dy, dx)) return false
+    }
+    return true
+}

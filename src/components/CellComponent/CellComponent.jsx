@@ -1,12 +1,12 @@
 import { observer } from "mobx-react-lite"
-import React, { useContext, useEffect, useRef } from "react"
-import { Context } from "../.."
+import React, { useEffect, useRef } from "react"
+import { useAppContext } from "../../hook/useAppContext"
 import styles from "./CellCmponent.module.scss"
 
 const CellComponent = observer(({cell, children}) => {
     
     const{shot, placedMarker, y, x} = cell
-    const{application} = useContext(Context)
+    const{application} = useAppContext()
     const ref = useRef(null)
     const cssStyles = [styles.cell_content, styles.marker]
 
@@ -23,8 +23,6 @@ const CellComponent = observer(({cell, children}) => {
     useEffect(() => {
         application.player.setCells(ref.current)
     }, [])
-
-    console.log('render cell')
 
     return (
         <div 

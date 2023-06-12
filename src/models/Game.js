@@ -13,11 +13,10 @@ export class Game {
 
     addShot(y, x) {
         if(this.gameStatus !== 'StartGame' || !this.isPlayerMove) return false
-        
-        const key = `y${y}x${x}`
-        const{shots} = this.app.rival
-        if(shots.has(key)) return false
-
+        // const key = `y${y}x${x}`
+        // const{shots} = this.app.rival
+        // if(shots.has(key)) return false
+        if(this.app.rival.board[y][x].shot) return false
         if(this.isOnlineGame) {
             this.app.socket.sendMessage({type: 'Shot', y, x})
         }

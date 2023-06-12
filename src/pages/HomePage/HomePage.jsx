@@ -1,16 +1,16 @@
-import React, { useContext, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { Context } from "../.."
+import React from "react"
+import { useNavigate } from "react-router-dom"
 import { SHIPS_ROUTE } from "../../utils/consts"
 import styles from "./HomePage.module.scss"
 import { observer } from "mobx-react-lite"
 import Container from "../../components/Container/Container"
+import { useAppContext } from "../../hook/useAppContext"
 
 
 const HomePage = observer(() => {
 
     const navigate = useNavigate()
-    const{application} = useContext(Context)
+    const{application} = useAppContext()
 
     return (
         <Container>
@@ -24,8 +24,7 @@ const HomePage = observer(() => {
                     <button
                         className={styles.btn}
                         onClick={() => {
-                            application.game.setIsOlineGame(false)
-                            navigate(SHIPS_ROUTE)
+                            navigate(SHIPS_ROUTE, {replace: true})
                         }}
                     >
                         С ботом
@@ -33,8 +32,7 @@ const HomePage = observer(() => {
                     <button 
                         className={styles.btn}
                         onClick={() => {
-                            application.game.setIsOlineGame(true)
-                            navigate(SHIPS_ROUTE)
+                            navigate(SHIPS_ROUTE, {replace: true})
                         }}                    
                     >
                         С другом

@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Context } from "../..";
+import { useAppContext } from "../../hook/useAppContext";
 import { HOME_ROUTE } from "../../utils/consts";
 import Modal from "./Modal";
 
@@ -8,12 +8,12 @@ import Modal from "./Modal";
 const ExitGameModal = ({onHide}) => {
 
     const navigate = useNavigate()
-    const{application} = useContext(Context)
+    const{application} = useAppContext()
 
     const exitGame = () => {
         const{socket} = application
         socket.closeConnection()
-        navigate(HOME_ROUTE)
+        navigate(HOME_ROUTE, {replace: true})
         onHide()
     }
 

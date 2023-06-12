@@ -1,4 +1,4 @@
-import { inField, isUnderPoint } from "../utils/additional"
+import { inField, isUnderPoint, shipIteration } from "../utils/additional"
 import { ships } from "../utils/consts"
 import { Ship } from "./Ship"
 
@@ -37,6 +37,7 @@ export class Preparation {
             this.offsetX = this.app.mouse.x - left
             this.offsetY = this.app.mouse.y - top
         }
+        console.log(this.dragetShip)
     }
 
     getCell() {
@@ -58,6 +59,7 @@ export class Preparation {
         )
     }
 
+
     markCell() {
         const cell = this.getCell()
         if(!cell) {
@@ -72,23 +74,21 @@ export class Preparation {
         const{y, x} = cell
         let currentCell = this.app.player.board[y][x]
 
-        const dRow = this.ship.direction ==='row'
-        const dColumn = this.ship.direction ==='column'
-
         let placedMarker = 'green'
 
-        for(let i = 0; i < this.ship.size; i++) {
-            const dy = y + dColumn * i
-            const dx = x + dRow * i
+        const shipInField = shipIteration(
+            (y, x) => {
+                if(!inField(y, x)) {
+                    this.setShipCells(null, true)
+                    return false
+                }
+                const{board} = this.app.player
+                this.shipCells.push(board[y][x])
+                if(!board[y][x].free) placedMarker = 'red'
+                return true
+            }, this.ship, {x, y})
 
-            if(!inField(dy, dx)) {
-                this.setShipCells(null, true)
-                return
-            }
-            const{board} = this.app.player
-            this.shipCells.push(board[dy][dx])
-            if(!board[dy][dx].free) placedMarker = 'red'
-        }
+        if(!shipInField) return false
 
         this.setShipCells(placedMarker)
 
@@ -124,6 +124,7 @@ export class Preparation {
     }
 
     update() {
+        // console.log(this.dragetShip)
         if(this.dragetShip && this.app.mouse.left) {
             this.moveShip()        
         }

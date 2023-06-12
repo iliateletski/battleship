@@ -1,4 +1,4 @@
-export const HOME_ROUTE = '/home'
+export const HOME_ROUTE = '/'
 export const GAME_ROUTE = '/game'
 export const SHIPS_ROUTE = '/ships'
 
@@ -22,4 +22,13 @@ export const markerColors = {
     red: '#ED1414',
     green: '#2DBE45',
     blue: '#3355AA'
+}
+
+export const MESSAGE = {
+    close: 'Соеденение разорвано.',
+    SetShips: 'Ожидание соперника ...',
+    WaitForSecondPlayer: 'Ожидание соперника ...',
+    WaitForSecondPlayer: 'Ожидание соперника ...',
+    win_true: 'Вы победили!!!',
+    win_false: 'Вы проиграли.',
 }

@@ -1,24 +1,24 @@
-import React, { useContext, useEffect, useState } from "react"
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import styles from "./PlaceShips.module.scss"
 import BoardComponent from "../../components/BoardComponent/BoardComponent"
 import PortComponent from "../../components/PortComponent/PortComponent"
 import Button from "../../components/Buttons/Button"
-import { HOME_ROUTE, SHIPS_ROUTE, GAME_ROUTE } from "../../utils/consts"
-import { fetchRoomId } from "../../http/gameAPI"
+import { SHIPS_ROUTE, GAME_ROUTE } from "../../utils/consts"
 import { observer } from "mobx-react-lite"
-import { Context } from "../.."
 import Container from "../../components/Container/Container"
-
 import CopyLink from "../../components/CopyLink/CopuLink"
+import InfoModal from "../../components/Modals/InfoModal"
+import { useAppContext } from "../../hook/useAppContext"
 
 const PlaceShips = observer(() => {
-
+    
+    const{application} = useAppContext()
+    const[showModal, setShowModal] = useState(false)
+    const{game} = application
+    const isFirstPlayer = game.gameStatus === 'WaitForSecondPlayer'
     const navigate = useNavigate()
     const {roomId} = useParams()
-    const{application} = useContext(Context)
-    const{game}= application
-    const isFirstPlayer = game.gameStatus === 'WaitForSecondPlayer'
     const cssStyles = {
         border: '2px solid',
         fontSize: '28px',
@@ -26,19 +26,27 @@ const PlaceShips = observer(() => {
         lineHeight: '33px'
     }
 
+    const[animation, setAnimation] = useState(false)
+
+    const sendShipPoints = () => {
+        const shipPoints = application.player.shipPoints()
+        console.log(shipPoints)
+        if(!shipPoints) {
+            setAnimation(true)
+            setTimeout(() => setAnimation(false), 1000)
+            return false
+        }
+        application.MouseStop()
+        application.socket.sendMessage(shipPoints)
+        navigate(`${GAME_ROUTE}/${roomId}`, {replace: true})
+    }
+
     useEffect(() => {
-        if(roomId && application.game.isOnlineGame) {
-            application.initWebSocket(roomId)
+        if(game.gameStatus === 'close' || game.gameStatus === 'Disconnected') {
+            setShowModal(true)
         }
-        
-        if(!roomId && application.game.isOnlineGame) {
-            fetchRoomId()
-            .then(({data}) => {
-                navigate(`${SHIPS_ROUTE}/${data.roomId}`)
-                application.initWebSocket(data.roomId)
-            })
-        }
-    }, [])
+    }, [game.gameStatus])
+
 
     return (
         <Container>
@@ -46,7 +54,7 @@ const PlaceShips = observer(() => {
                 <div className={styles.place_ships}>
                     <BoardComponent isPlayerboard/>
                     <div className={styles.port_box}>
-                        <PortComponent />
+                        <PortComponent animation={animation}/>
                         <div className={styles.btn_box}>
                             <Button 
                                 cssStyles={cssStyles}
@@ -55,17 +63,12 @@ const PlaceShips = observer(() => {
                                 cycle
                             </Button>
                             <Button 
-                                onClick={() => application.initWebSocket(roomId)}
                                 cssStyles={{...cssStyles, fontFamily: '"Caveat", cursive'}}
                             >
                                 Авто
                             </Button>
                             <Button 
-                                onClick={() => {
-                                    const shipPoints = application.player.shipPoints()
-                                    application.socket.sendMessage(shipPoints)
-                                    navigate(GAME_ROUTE)
-                                }}
+                                onClick={() => sendShipPoints()}
                                 cssStyles={{...cssStyles, fontFamily: '"Caveat", cursive'}}
                             >
                                 Далее
@@ -78,6 +81,9 @@ const PlaceShips = observer(() => {
                     <CopyLink url={`http://localhost:3000${SHIPS_ROUTE}/${roomId}`}/>
                 }
             </div>  
+            {
+                showModal && <InfoModal onHide={() => setShowModal(false)}/>
+            }
         </Container>
     )
 })

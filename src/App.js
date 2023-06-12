@@ -7,7 +7,6 @@ import './css/App.scss';
 function App() {
 
   const{application} = useContext(Context)
-  const{socket} = application
 
   return (
     <div className='app'>

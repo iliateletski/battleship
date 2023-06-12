@@ -1,22 +1,20 @@
 import { observer } from "mobx-react-lite"
-import React, { useContext, useRef } from "react"
-import { Context } from "../.."
+import React from "react"
+import { useAppContext } from "../../hook/useAppContext"
 import ShipComponent from "../ShipComponent/ShipComponent"
 import styles from "./PortComponent.module.scss"
 
-const PortComponent = observer(() => {
+const PortComponent = observer(({animation}) => {
 
-    const{application} = useContext(Context)
+    const{application} = useAppContext()
     const ships = application.player.ships.filter(s => !s.placed)
-
 
     return (
         <div className={styles.port}>
                 {
-                    ships.map((ship, i) =>
-                        <ShipComponent ship={ship} key={ship.id}/>
+                    ships.map(ship =>
+                        <ShipComponent ship={ship} key={ship.id} animation={animation}/>
                     )
-                    
                 }
         </div>
     )

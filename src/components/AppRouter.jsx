@@ -1,9 +1,14 @@
 import React from "react"
-import { Routes, Route } from 'react-router-dom'
-import HomePage from "../pages/HomePage/HomePage"
+import { observer } from "mobx-react-lite"
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { useAppContext } from "../hook/useAppContext"
+import Game from "../pages/Game/Game"
+import { GAME_ROUTE, HOME_ROUTE} from "../utils/consts"
 import { gameRoutes } from "../utils/routes"
 
-const AppRouter = () => {
+const AppRouter = observer(() => {
+
+    const{application} = useAppContext()
     
     return (
         <Routes>
@@ -12,9 +17,12 @@ const AppRouter = () => {
                     <Route key={path} path={path} element={element}/>
                 )
             }
-                <Route path="*" element={<HomePage/>}/>
+            {
+                application.isApp &&
+                <Route path={`${GAME_ROUTE}/:roomId`} element={<Game/>}/>
+            }
+            <Route path="*" element={<Navigate to={HOME_ROUTE}/>}/>
         </Routes>
     )
-}
-
+})
 export default AppRouter;
