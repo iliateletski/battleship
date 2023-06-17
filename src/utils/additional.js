@@ -15,7 +15,6 @@ export const inField = (y, x) => {
 export const changeCellState = (board, ship, boolean) => {
     const dx = ship.direction === 'row'
     const dy = ship.direction === 'column'
-    console.log(ship)
 
     for(let y = ship.y - 1; y <= ship.y + ship.size * dy + dx ; y++) {
         for(let x = ship.x - 1; x <= ship.x + ship.size * dx + dy; x++) {
@@ -31,7 +30,7 @@ export const addEventListeners = (element, type, callback) => {
     return () => element.removeEventListener(type, callback)
 }
 
-export const shipIteration = (callback, ship, {newDirection = '', y = null, x = null, count = 0}) => {
+export const shipIteration = (callback, ship, {newDirection = '', y = null, x = null, count = 0} = {}) => {
 
     const dRow = newDirection ? newDirection ==='row' : ship.direction === 'row'
     const dColumn = newDirection ? newDirection ==='column' : ship.direction === 'column'
@@ -46,3 +45,31 @@ export const shipIteration = (callback, ship, {newDirection = '', y = null, x = 
     }
     return true
 }
+
+
+
+
+
+
+
+
+
+
+// export const rivalCell= (board, ship, boolean) => {
+//     const dx = ship.direction === 'row'
+//     const dy = ship.direction === 'column'
+
+//     for(let y = ship.y - 1; y <= ship.y + ship.size * dy + dx ; y++) {
+//         for(let x = ship.x - 1; x <= ship.x + ship.size * dx + dy; x++) {
+//             if(dy && (y >= ship.y && y < ship.y + ship.size)) {
+//                 if(x === ship.x) x += dy
+//             }
+
+//             if(inField(y, x)) {
+//                 board[y][x].free = boolean
+//             }
+
+//             if(dx && y === ship.y) x += ship.size
+//         }   
+//     }
+// }

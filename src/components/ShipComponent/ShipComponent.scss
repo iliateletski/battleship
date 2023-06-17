@@ -12,12 +12,22 @@
     }
     &_2{
         width: 50px;
+        background-image: url(../../images/ship_2.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border: none;
         &_column{
             transform: rotate(90deg) translate(12px, 13px);
         }
     }
     &_3{
         width: 75px;
+        background-image: url(../../images/ship_3.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border: none;
         &_column{
            transform: rotate(90deg) translate(25px, 25px); 
         }
@@ -27,7 +37,7 @@
         background-image: url(../../images/ship_4.svg);
         background-position: center;
         background-repeat: no-repeat;
-        background-size: cover;
+        background-size: contain;
         border: none;
         &_column{
            transform: rotate(90deg) translate(37px, 38px);
@@ -37,13 +47,13 @@
 
 .animation{
     animation-name: no-placed;
-    animation-duration: 0.3s;
+    animation-duration: 0.2s;
     animation-iteration-count: 3;
 }
 
 @keyframes no-placed {
     from{
-        filter: opacity(0.5);
+        filter: opacity(0.3);
     }
 
     to{

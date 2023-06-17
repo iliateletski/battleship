@@ -49,6 +49,11 @@ export class WebSocketAPI {
             if(this.app.game.isPlayerMove && !message.hit) {
                 this.app.game.setIsPlayerMove(false)
             } 
+
+            if(this.app.game.isPlayerMove && message.kill) {
+                const{y, x} = message
+                this.app.rival.markKillShip(y, x)  
+            }
         }
 
         if(type === 'EndGame') {

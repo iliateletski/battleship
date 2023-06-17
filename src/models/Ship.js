@@ -7,7 +7,6 @@ export class Ship {
     placed = false
     moving = false
 
-
     constructor (id, size, direction, startLef, startTop) {
         this.id = id
         this.size = size
