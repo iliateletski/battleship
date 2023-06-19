@@ -4,7 +4,6 @@ import { observer } from "mobx-react-lite"
 import { useAppContext } from "../../hook/useAppContext"
 
 const ShipComponent = observer(({ship, animation}) => {
-    console.log(ship)
     const{application} = useAppContext()
     const{preparation} = application
     const styles =['ship',`ship_${ship.size}`, `ship_${ship.size}_${ship.direction}`]

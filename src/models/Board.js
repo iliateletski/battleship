@@ -1,13 +1,12 @@
 import { COL_MARKERS } from "../utils/consts";
 import { makeAutoObservable } from "mobx";
-import { inField, changeCellState, shipIteration } from "../utils/additional";
+import { inField, iterationAroundShip, shipIteration, markCells } from "../utils/additional";
 import { Ship } from "./Ship";
-
 
 export class Board {
     board = []
     cells = []
-    shots = new Map()
+    hits = new Map()
     ships = []
 
     constructor() {
@@ -16,6 +15,7 @@ export class Board {
     }
 
     createBoard() {
+        console.log('create')
         const board = []
 
         for(let y = 0; y < 10; y++) {
@@ -38,12 +38,11 @@ export class Board {
             board[y][x].ship = ship
 
             if(ship.moving) continue
-            changeCellState(board, ship, false)
-        }
-
-        for(const shot of this.shots.values()) {
-            const{y, x} = shot
-            board[y][x].shot = shot
+            iterationAroundShip((y, x) => {
+                if(inField(y, x)) {
+                    board[y][x].free = false
+                }
+            }, ship)
         }
 
         console.log(board)
@@ -87,16 +86,13 @@ export class Board {
         for(const ship of this.ships) {
             if(!ship.placed) return null
             const points = []
-            // for(let i = 0; i < ship.size; i++) {
-            //     points.push({y: ship.y, x: ship.x + i })
-            // }
+
             shipIteration((y, x) => {
                 points.push({y, x})
                 return true
             }, ship)
             shipPoints.ships.push({points})
         }
-        
         return shipPoints
     }
 
@@ -134,56 +130,52 @@ export class Board {
 
     addShot(shotResult) {
         console.log(shotResult)
-        const key = `y${shotResult.y}x${shotResult.x}`
-        this.shots.set(key, shotResult)
+        if(shotResult.hit) {
+            const key = `y${shotResult.y}x${shotResult.x}`
+            this.hits.set(key, shotResult)
+        }
         const{y, x} = shotResult
+        shotResult.kill && this.markKilledShip(y, x) 
         this.board[y][x].shot = shotResult
-        // this.createBoard()
     }
 
-    markKillShip(y, x) {
-        let dx = false
-        let dy = false
+    markKilledShip(y, x) {
         let size = 1
-        let shipPoint = {x, y}
+        let shipPoint = {cY: y, cX: x}
+        const dx = this.hits.has(`y${y}x${x - 1}`) || this.hits.has(`y${y}x${x + 1}`)
+        const dy = this.hits.has(`y${y - 1}x${x}`) || this.hits.has(`y${y + 1}x${x}`)
+        const direction = dx ? 'row' : 'column' 
 
-        if(this.shots.has(`y${y}x${x - 1}`) || this.shots.has(`y${y}x${x + 1}`)) {
-            dx = true
+        const createShip = (y, x) => {
+            let{ship} = this.board[y][x]
+            if(!ship) {
+                ship = new Ship(y, size, direction, '0', '0')
+                Object.assign(ship, {y, x})
+                this.board[y][x].ship = ship
+            }
+            markCells(this.board, ship)
+            return true 
         }
-    
-        if(this.shots.has(`y${y - 1}x${x}`) || this.shots.has(`y${y + 1}x${x}`)) {
-            dy = true
+        
+        if(!dy && !dx) return createShip(y, x)
+
+        for(let i = 0, k = 1; i < 2; i++) {
+            for(let i = 1; i < 4; i++) {
+                let cY = y - i * k * dy
+                let cX = x - i * k * dx
+                if(this.hits.has(`y${cY}x${cX}`)) {
+                    size++
+                    shipPoint = {
+                        cX: shipPoint.cX > cX ? cX : shipPoint.cX,
+                        cY: shipPoint.cY > cY ? cY : shipPoint.cY
+                    }
+                } else break
+            }
+            k = -1
         }
 
-        if(!dy && !dx) {
-            this.board[y][x].ship = new Ship(y, size, 'row', '0', '0')
-            return
-        }
-
-        for(let i = 1; i < 4; i++) {
-            let cY = y - i * dy
-            let cX = x - i * dx
-            if(this.shots.has(`y${cY}x${cX}`)) {
-                size++
-                shipPoint = {
-                    x: shipPoint.x > cX ? cX : shipPoint.x,
-                    y: shipPoint.y > cY ? cY : shipPoint.y
-                }
-            } else break
-        }
-
-        for(let i = 1; i < 4; i++) {
-            let cY = y + i * dy
-            let cX = x + i * dx
-            if(this.shots.has(`y${cY}x${cX}`)) {
-                size++
-                shipPoint = {
-                    x: shipPoint.x > cX ? cX : shipPoint.x,
-                    y: shipPoint.y > cY ? cY : shipPoint.y
-                } 
-            } else break
-        }
-        shipPoint = {...shipPoint, size, direction: dx ? 'row' : 'column'}
-        this.board[shipPoint.y][shipPoint.x].ship = new Ship(y, shipPoint.size, shipPoint.direction, '0', '0')
+        const{cY, cX} = shipPoint
+        createShip(cY, cX)
+        console.log(this.board)
     }
 }

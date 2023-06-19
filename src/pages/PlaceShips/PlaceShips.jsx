@@ -65,13 +65,6 @@ const PlaceShips = observer(() => {
                             </Button>
                             <Button 
                                 cssStyles={{...cssStyles, fontFamily: '"Caveat", cursive'}}
-                                // onClick={() => {rivalCell(
-                                //     application.rival.board,
-                                //     {size: 2, direction: 'column', x: 1, y: 1},
-                                //     false
-                                // )
-                                // console.log(application.rival.board)
-                                // }}
                             >
                                 Авто
                             </Button>

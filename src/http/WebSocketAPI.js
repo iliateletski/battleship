@@ -50,10 +50,10 @@ export class WebSocketAPI {
                 this.app.game.setIsPlayerMove(false)
             } 
 
-            if(this.app.game.isPlayerMove && message.kill) {
-                const{y, x} = message
-                this.app.rival.markKillShip(y, x)  
-            }
+            // if(this.app.game.isPlayerMove && message.kill) {
+            //     const{y, x} = message
+            //     this.app.rival.markKillShip(y, x)  
+            // }
         }
 
         if(type === 'EndGame') {
