@@ -13,13 +13,12 @@ export const inField = (y, x) => {
 }
 
 export const iterationAroundShip = (callback, ship) => {
-    const dx = ship.direction === 'row'
-    const dy = ship.direction === 'column'
+    const dRow = ship.direction === 'row'
+    const dColumn = ship.direction === 'column'
 
-    for(let y = ship.y - 1; y <= ship.y + ship.size * dy + dx ; y++) {
-        for(let x = ship.x - 1; x <= ship.x + ship.size * dx + dy; x++) {
-            callback(y, x, ship, dy, dx)
-            console.log(y, x)
+    for(let y = ship.y - 1; y <= ship.y + ship.size * dColumn + dRow ; y++) {
+        for(let x = ship.x - 1; x <= ship.x + ship.size * dRow + dColumn; x++) {
+            callback(y, x, ship, dColumn, dRow)
         }   
     }
 }
@@ -39,10 +38,9 @@ export const shipIteration = (callback, ship, {newDirection = '', y = null, x = 
     
     for(let i = count; i < ship.size; i++) {
 
-        const dx = currentX + dRow * i
-        const dy = currentY + dColumn * i
-        console.log(dy, dx)
-        if(!callback(dy, dx)) return false
+        const cX = currentX + dRow * i
+        const cY = currentY + dColumn * i
+        if(!callback(cY, cX)) return false
     }
     return true
 }

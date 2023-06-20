@@ -59,7 +59,6 @@ export class Preparation {
         )
     }
 
-
     markCell() {
         const cell = this.getCell()
         if(!cell) {
@@ -68,7 +67,7 @@ export class Preparation {
         }
 
         if(!this.ship.moving && this.ship.placed) {
-            this.app.player.removeShip(this.ship)
+            this.app.player.moveShip(this.ship)
         }
 
         const{y, x} = cell

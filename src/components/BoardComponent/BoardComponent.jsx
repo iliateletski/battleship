@@ -18,12 +18,12 @@ const BoardComponent = observer(({isPlayerboard}) => {
                         <div className={styles.row} key={y}>
                             {
                                 row.map((cell, x) => 
-                                    <CellComponent 
+                                    <CellComponent
                                         key={x}
                                         x={cell.x}
                                         y={cell.y}
                                         cell={cell}
-                                    > 
+                                    >
                                         {
                                             cell.colMarker  && 
                                             <div className={[styles.marker_col, styles.marker].join(' ')}>{cell.colMarker}</div>
@@ -36,7 +36,6 @@ const BoardComponent = observer(({isPlayerboard}) => {
                                             cell.ship && 
                                             <ShipComponent ship={cell.ship}/>
                                         }
-                                        
                                     </CellComponent>
                                 )
                             }

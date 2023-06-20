@@ -15,13 +15,12 @@ export class Board {
     }
 
     createBoard() {
-        console.log('create')
         const board = []
 
         for(let y = 0; y < 10; y++) {
             const row = []
             for(let x = 0; x < 10; x++) {
-                const cell = {x, y, ship: null, free: true, shot: null, placedMarker: null}
+                const cell = {x, y, ship: null, free: true, shot: null, placedMarker: null, shipIds: []}
                 row.push(cell) 
             }  
             board.push(row) 
@@ -41,6 +40,7 @@ export class Board {
             iterationAroundShip((y, x) => {
                 if(inField(y, x)) {
                     board[y][x].free = false
+                    board[y][x].shipIds.push(ship.id)
                 }
             }, ship)
         }
@@ -100,7 +100,7 @@ export class Board {
         this.cells = [...this.cells, cell]
     }
     
-    removeShip(ship) {
+    moveShip(ship) {
         Object.assign(ship, {moving: true})
         this.createBoard() 
     }
@@ -110,26 +110,24 @@ export class Board {
 
         const newDirection = ship.direction === 'row' ? 'column' : 'row'
 
-        const shipInField = shipIteration(
-            (y, x) => {
-                if(!inField(y, x)) return false
-                if(!this.board[y][x].free) {
-                    this.createBoard()
-                    return false 
-                }
-                return true
-                
-            }, ship, {newDirection, count: 2}
-        )
+        const dRow = newDirection === 'row'
+        const dColumn = newDirection === 'column'
+        const{y, x} = ship
 
-        if(!shipInField) return false
+        let cX = x + (ship.size - 1) * dRow
+        let cY = y + (ship.size - 1) * dColumn
+
+        if(!inField(cY, cX)) return false
+        const{shipIds} = this.board[cY][cX]
+        if( (!shipIds.includes(ship.id) && shipIds.length) || shipIds.length > 1) {
+            return false 
+        }
 
         Object.assign(ship, {direction: newDirection})
         this.createBoard()
     }
 
     addShot(shotResult) {
-        console.log(shotResult)
         if(shotResult.hit) {
             const key = `y${shotResult.y}x${shotResult.x}`
             this.hits.set(key, shotResult)
@@ -142,9 +140,9 @@ export class Board {
     markKilledShip(y, x) {
         let size = 1
         let shipPoint = {cY: y, cX: x}
-        const dx = this.hits.has(`y${y}x${x - 1}`) || this.hits.has(`y${y}x${x + 1}`)
-        const dy = this.hits.has(`y${y - 1}x${x}`) || this.hits.has(`y${y + 1}x${x}`)
-        const direction = dx ? 'row' : 'column' 
+        const dRow = this.hits.has(`y${y}x${x - 1}`) || this.hits.has(`y${y}x${x + 1}`)
+        const dColumn = this.hits.has(`y${y - 1}x${x}`) || this.hits.has(`y${y + 1}x${x}`)
+        const direction = dRow ? 'row' : 'column' 
 
         const createShip = (y, x) => {
             let{ship} = this.board[y][x]
@@ -157,12 +155,12 @@ export class Board {
             return true 
         }
         
-        if(!dy && !dx) return createShip(y, x)
+        if(!dColumn && !dRow) return createShip(y, x)
 
         for(let i = 0, k = 1; i < 2; i++) {
             for(let i = 1; i < 4; i++) {
-                let cY = y - i * k * dy
-                let cX = x - i * k * dx
+                let cY = y - i * k * dColumn
+                let cX = x - i * k * dRow
                 if(this.hits.has(`y${cY}x${cX}`)) {
                     size++
                     shipPoint = {
@@ -176,6 +174,5 @@ export class Board {
 
         const{cY, cX} = shipPoint
         createShip(cY, cX)
-        console.log(this.board)
     }
 }
