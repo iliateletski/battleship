@@ -123,7 +123,6 @@ export class Preparation {
     }
 
     update() {
-        // console.log(this.dragetShip)
         if(this.dragetShip && this.app.mouse.left) {
             this.moveShip()        
         }

@@ -1,4 +1,7 @@
+import { addEventListeners } from "../utils/additional"
+
 export class WebSocketAPI {
+    removeEventListeners = []
     socket = null
     app = null
     
@@ -12,19 +15,32 @@ export class WebSocketAPI {
 
         this.socket = socket
 
-        this.socket.onopen = (e) => {
-            console.log(socket.readyState)
-        }
-        this.socket.onmessage = (e) => this.handlerMessage(e)
+        this.removeEventListeners.push(
+            addEventListeners(
+                socket, 'open', (e) => console.log(socket.readyState)
+            )
+        )
 
-        this.socket.onerror = (e) => {
-            console.log(e)
-        }
+        this.removeEventListeners.push(
+            addEventListeners(
+                socket, 'message', (e) => this.handleMessage(e)
+            )
+        )
 
-        this.socket.onclose = (e) => this.handlerClose(e)
+        this.removeEventListeners.push(
+            addEventListeners(
+                socket, 'error', (e) => console.log(e)
+            )
+        )
+
+        this.removeEventListeners.push(
+            addEventListeners(
+                socket, 'close', (e) => this.handleClose(e)
+            )
+        )
     }
 
-    handlerMessage(e) {
+    handleMessage(e) {
         const message = JSON.parse(e.data)
         const{type} = message
         console.log(message)
@@ -49,11 +65,6 @@ export class WebSocketAPI {
             if(this.app.game.isPlayerMove && !message.hit) {
                 this.app.game.setIsPlayerMove(false)
             } 
-
-            // if(this.app.game.isPlayerMove && message.kill) {
-            //     const{y, x} = message
-            //     this.app.rival.markKillShip(y, x)  
-            // }
         }
 
         if(type === 'EndGame') {
@@ -64,17 +75,17 @@ export class WebSocketAPI {
     }
 
     sendMessage(body) {
-        console.log(body)
         this.socket.send(JSON.stringify(body))
     }
     
-    handlerClose(e) {
+    handleClose(e) {
         this.app.game.setGameStatus(e.type)
-        console.log(this.socket.readyState)
+        for(const removeEventListener of this.removeEventListeners) {
+            removeEventListener()
+        } 
     }
 
     closeConnection() {
         this.socket.close()
-        console.log(this.socket.readyState)
     }
 }

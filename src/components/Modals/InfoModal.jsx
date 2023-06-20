@@ -5,7 +5,7 @@ import Modal from "./Modal";
 import { MESSAGE } from "../../utils/consts";
 import { useAppContext } from "../../hook/useAppContext";
 
-const InfoModal = ({onHide}) => {
+const InfoModal = ({onHide,}) => {
 
     const navigate = useNavigate()
     const{application} = useAppContext()

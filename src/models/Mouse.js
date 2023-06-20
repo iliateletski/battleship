@@ -2,15 +2,9 @@ import { addEventListeners } from "../utils/additional"
 
 export class Mouse {
     removeEventListeners = []
-
     x = null
-    pX = null
-
     y = null
-    pY = null
-
     left = false
-    pLeft = false
 
     constructor(element) {
 
@@ -74,7 +68,6 @@ export class Mouse {
     update(e) {
         this.x = e.clientX
         this.y = e.clientY
-        // this.under = true
     }
 
     tick() {
