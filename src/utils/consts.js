@@ -1,6 +1,6 @@
-export const HOME_ROUTE = 'battleship/'
-export const GAME_ROUTE = 'battleship/game'
-export const SHIPS_ROUTE = 'battleship/ships'
+export const HOME_ROUTE = '/battleship/'
+export const GAME_ROUTE = '/battleship/game'
+export const SHIPS_ROUTE = '/battleship/ships'
 
 export const COL_MARKERS = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и']
 export const ROW_MARKERS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
@@ -27,7 +27,6 @@ export const markerColors = {
 export const MESSAGE = {
     close: 'Соеденение разорвано.',
     SetShips: 'Ожидание соперника ...',
-    WaitForSecondPlayer: 'Ожидание соперника ...',
     WaitForSecondPlayer: 'Ожидание соперника ...',
     win_true: 'Вы победили!!!',
     win_false: 'Вы проиграли.',
