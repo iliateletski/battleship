@@ -1,6 +1,5 @@
 import { GAME_ROUTE, HOME_ROUTE, SHIPS_ROUTE } from "./consts"
 import HomePage from '../pages/HomePage/HomePage'
-import Game from '../pages/Game/Game'
 import PlaceShips from '../pages/PlaceShips/PlaceShips'
 import RequireGame from "../hoc/RequireGame"
 
