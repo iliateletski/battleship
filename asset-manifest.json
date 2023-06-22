@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/battleship/static/css/main.370a4cb8.css",
+    "main.js": "/battleship/static/js/main.13235f95.js",
+    "static/media/wooden-wall-scratched-material-background-texture-concept.jpg": "/battleship/static/media/wooden-wall-scratched-material-background-texture-concept.d04fcdf71ffd0e97afb0.jpg",
+    "static/media/ship_3.svg": "/battleship/static/media/ship_3.3dc34f30b07799d644d4.svg",
+    "static/media/ship_4.svg": "/battleship/static/media/ship_4.bc07a653c1814ed1e6b0.svg",
+    "static/media/blue_rectangle.svg": "/battleship/static/media/blue_rectangle.d1b2797662b60fbb9d59.svg",
+    "static/media/green_rectangle.svg": "/battleship/static/media/green_rectangle.ae8ebcd4daa20bad6fdf.svg",
+    "static/media/red_rectangle.svg": "/battleship/static/media/red_rectangle.8533ddfeda181e57b5c8.svg",
+    "static/media/ship_2.svg": "/battleship/static/media/ship_2.cd01419b42aa9ae907d8.svg",
+    "static/media/ship_1.svg": "/battleship/static/media/ship_1.b26e66af919d02878ae1.svg",
+    "index.html": "/battleship/index.html",
+    "main.370a4cb8.css.map": "/battleship/static/css/main.370a4cb8.css.map",
+    "main.13235f95.js.map": "/battleship/static/js/main.13235f95.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.370a4cb8.css",
+    "static/js/main.13235f95.js"
+  ]
+}
