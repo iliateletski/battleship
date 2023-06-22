@@ -10,6 +10,7 @@ const Container = ({children}) => {
     const[showModal, setShowModal] = useState(false)
     const location = useLocation()
     const isHomePage = location.pathname === HOME_ROUTE
+    console.log(location)
 
     return (
         <div className={styles.container} >
