@@ -1,4 +1,4 @@
-export const HOME_ROUTE = '/battleship/home'
+export const HOME_ROUTE = '/battleship/'
 export const GAME_ROUTE = '/battleship/game'
 export const SHIPS_ROUTE = '/battleship/ships'
 
