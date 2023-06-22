@@ -16,9 +16,11 @@ const CellComponent = observer(({cell, children}) => {
     if(placedMarker === 'green') {
         cssStyles.push(styles.marker_green)
     }
-    if(shot && !shot.hit) {
-        cssStyles.push(styles.marker_blue)
-    }
+    // if(shot && !shot.hit) {
+    //     cssStyles.push(styles.marker_blue, styles.animation)
+    // }
+
+    const miss = [styles.marker_blue, styles.animation, styles.marker]
     
     useEffect(() => {
         application.player.setCells(ref.current)
@@ -36,7 +38,10 @@ const CellComponent = observer(({cell, children}) => {
                 ref={ref}
             >
                 {
-                    (shot && shot.hit) && <span className={styles.miss}>X</span>
+                    (shot && shot.hit) && <span className={styles.hit}>X</span>
+                }
+                {
+                    (shot && !shot.hit) && <span className={miss.join(' ')}></span> 
                 }
                 {children}
             </div>
