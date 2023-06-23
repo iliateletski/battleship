@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className='app'>
-      <BrowserRouter>
+      <BrowserRouter basename='/battleship'>
         <AppRouter/>
       </BrowserRouter>
     </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import styles from "./PlaceShips.module.scss"
 import BoardComponent from "../../components/BoardComponent/BoardComponent"
 import PortComponent from "../../components/PortComponent/PortComponent"
@@ -48,7 +48,6 @@ const PlaceShips = observer(() => {
         }
     }, [game.gameStatus])
 
-
     return (
         <Container>
             <div className={styles.box}>
@@ -79,7 +78,7 @@ const PlaceShips = observer(() => {
                 </div>
                 {
                     isFirstPlayer &&
-                    <CopyLink url={`http://localhost:3000${SHIPS_ROUTE}/${roomId}`}/>
+                    <CopyLink url={`${process.env.REACT_APP_URL}${SHIPS_ROUTE}/${roomId}`}/>
                 }
             </div>  
             {
