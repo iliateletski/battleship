@@ -1,16 +1,139 @@
-.container {
-    background: 
-      linear-gradient(180deg, transparent 81px, #ED82AD 81px, #ED82AD 84px, transparent 84px),
-      linear-gradient(#b0c4de, transparent 1px), 
-      linear-gradient(90deg, #b0c4de, #fff 1px);
-    background-size: 100% 100%, 25px 25px, 25px 25px;
-    background-position: 0 20px, -1px -1px, -1px 1px;
-    width: 1000px;
-    height: 575px;
-    margin: 0 auto;
-    position: relative;
+@mixin cells($y, $x, $z, $i, $size, $rotate: 180deg,) {
+  background: 
+  linear-gradient($rotate, transparent $y, #ED82AD $x, #ED82AD $z, transparent $i),
+  linear-gradient(#b0c4de, transparent 1px), 
+  linear-gradient(90deg, #b0c4de, #fff 1px);
+  background-size: $size;
+  background-position: 0 20px, -1px -1px, -1px 1px;
+}
+
+@mixin max_height-500 {
+  @media(max-height: 500px) {
+    .container{
+      width: 675px;
+      height: 350px;
+      @include cells(29px, 29px, 31px, 31px, (100% 100%, 25px 25px, 25px 25px));
+    }
+    .header{
+      height: 50px
+    }
   }
+}
+
+@mixin max_height-360 {
+  @media(max-height: 360px) {
+    .container{
+      @include cells(22px, 22px, 24px, 24px, (100% 100%, 22px 22px, 22px 22px));
+      background-position: 0px 20px, -2px -2px, -11px -11px;
+      width: 550px;
+      height: 307px;
+    }
+    .header{
+      height: 50px
+    }
+  }
+}
+
+.container {
+  @include cells(81px, 81px, 84px, 84px, (100% 100%, 25px 25px, 25px 25px));
+  width: 1000px;
+  height: 575px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 15px 18px 35px 3px rgb(0 0 0);
+}
 
 .header{
   position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100px;
+  padding: 10px;
+}
+
+@media(max-width: 1100px){
+  .container{
+    width: 925px;
+  }
+}
+
+@media(max-width: 1000px){
+  .container{
+    width: 824px;
+    height: 500px;
+    @include cells(55px, 55px, 58px, 58px, (100% 100%, 25px 25px, 25px 25px));
+  }
+
+  .header{
+    height: 75px
+  }
+  
+  @include max_height-500;
+  @include max_height-360;
+}
+
+
+@media(max-width: 870px) {
+  .container{
+    width: 748px;
+    height: 474px;
+  }
+  @include max_height-500;
+  @include max_height-360;
+}
+
+@media(max-width: 800px) {
+  .container{
+    width: 699px;
+  }
+  @include max_height-500;
+  @include max_height-360;
+
+}
+
+@media(max-width: 740px) {
+  .container{
+    width: 650px;
+  }
+  @include max_height-360;
+}
+
+@media(orientation: portrait) {
+  @media(max-width: 700px) {
+    .container{
+      width: 499px;
+      height: 650px;
+      @include cells(75px, 75px, 78px, 78px, (100% 100%, 25px 25px, 25px 25px), 270deg);
+    }
+  }
+
+  @media(max-width: 540px){
+    .container{
+      width: 398px;
+      @include cells(49px, 49px, 51px, 51px, (100% 100%, 25px 25px, 25px 25px), 270deg);
+    }
+
+    .header{
+      height: 50px;
+      padding: 5px;
+    }
+  }
+
+  @media(max-width: 410px){
+    .container{
+      width: 350px;
+      height: 650px;
+      @include cells(52px, 52px, 54px, 54px, (100% 100%, 25px 25px, 25px 25px), 270deg);
+    }
+  }
+
+  @media(max-width: 360px){
+    .container{
+      @include cells(42px, 42px, 44px, 44px, (100% 100%, 22px 22px, 22px 22px), 270deg);
+      background-position: 0 20px, -15px -15px, -1px -1px;
+      width: 307px;
+      height: 550px;
+    }
+  }
 }

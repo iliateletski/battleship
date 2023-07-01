@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../Button/Button";
 import styles from "./Modal.module.scss"
 
 const Modal = ({children, onHide, collback, isFooter}) => {
@@ -7,26 +8,24 @@ const Modal = ({children, onHide, collback, isFooter}) => {
         <div className={styles.overlay}>
             <div className={styles.modal}>
                 <div className={styles.modal_inner}>
-                    <div className={styles.modal_body}>
-                        <div className={styles.modal_content}>
-                            {children}
-                        </div>
+                    <div className={styles.modal_content}>
+                        {children}
                     </div>
                     {
                         isFooter &&
                         <div className={styles.modal_footer}>
-                            <button 
-                                className={styles.modal_btn}
+                            <Button 
+                                className={'general_btn'}
                                 onClick={() => collback()}
                             >
                                 Да
-                            </button>
-                            <button 
-                                className={styles.modal_btn}
-                                onClick={() => onHide(false)}
+                            </Button>
+                            <Button 
+                                className={'general_btn'}
+                                onClick={() => onHide()}
                             >
                                 Нет
-                            </button>
+                            </Button>
                         </div>
                     }
                 </div>

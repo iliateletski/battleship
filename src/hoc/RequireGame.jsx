@@ -14,11 +14,26 @@ const RequireGame = ({children}) => {
     const[loading, setLoading] = useState(true)
     const[url, setUrl] = useState('')
     const[error, setError] = useState('')
+
+    const handleError = (err) => {
+        setError(err.message)
+                setTimeout(() => {
+                    navigate(HOME_ROUTE)
+                    setError('')
+                }, 3000)
+    }
     
     useEffect(() => {
         application.start()
         if(roomId && application.game.isOnlineGame) {
-            application.initWebSocket(roomId)
+            try{
+                application.initWebSocket(roomId)
+            } catch(err) {
+                handleError(err)
+            } finally {
+                setLoading(false)
+            }
+            return
         }
         
         if(!roomId && application.game.isOnlineGame) {
@@ -27,14 +42,10 @@ const RequireGame = ({children}) => {
                 setUrl(`${SHIPS_ROUTE}/${data.roomId}`)
                 application.initWebSocket(data.roomId)
             })
-            .catch(err => {
-                setError(err.message)
-                setTimeout(() => {
-                    navigate(HOME_ROUTE)
-                }, 3000)
-            })
+            .catch(err => handleError(err))
+            .finally(() => setLoading(false))
         }
-        setLoading(false)
+        
     }, [])
 
     if(loading || error) {

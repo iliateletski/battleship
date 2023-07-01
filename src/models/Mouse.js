@@ -10,7 +10,7 @@ export class Mouse {
 
         this.removeEventListeners.push(
             addEventListeners(
-                element, 'mouseenter', 
+                element, 'pointerenter', 
                 (e) => {
                     this.tick()
                     this.update(e)
@@ -20,7 +20,7 @@ export class Mouse {
 
         this.removeEventListeners.push(
             addEventListeners(
-                element, 'mouseleave', 
+                element, 'pointerleave', 
                 (e) => {
                     this.tick()
                     this.update(e)
@@ -30,7 +30,7 @@ export class Mouse {
 
         this.removeEventListeners.push(
             addEventListeners(
-                element, 'mousemove', 
+                element, 'pointermove', 
                 (e) => {
                     this.tick()
                     this.update(e)
@@ -40,7 +40,7 @@ export class Mouse {
 
         this.removeEventListeners.push(
             addEventListeners(
-                element, 'mouseup', 
+                element, 'pointerup', 
                 (e) => {
                     this.tick()
                     this.update(e)
@@ -53,7 +53,7 @@ export class Mouse {
 
         this.removeEventListeners.push(
             addEventListeners(
-                element, 'mousedown', 
+                element, 'pointerdown', 
                 (e) => {
                     this.tick()
                     this.update(e)

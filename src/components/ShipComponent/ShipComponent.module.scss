@@ -1,0 +1,103 @@
+%background-options{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+@mixin ship($height, $width_1, $width_2, $width_3, $width_4) {
+    height: $height;
+    &_1 {
+        width: $width_1;
+    }
+    &_2 {
+        width: $width_2;
+        &_column {
+            transform: rotate(90deg) translate(12px, 10px);
+        }
+    }
+    &_3 {
+        width: $width_3;
+        &_column {
+            transform: rotate(90deg) translate(21px, 20px);
+        }
+    }
+    &_4 {
+        width: $width_4;
+        &_column {
+            transform: rotate(90deg) translate(35px, 33px)
+        }
+    }
+}
+
+.ship{
+    touch-action: none;
+    position: absolute;
+    border: none;
+    background-color:  transparent;
+    z-index: 2;
+    height: 25px;
+    &_1{
+        width: 25px;
+        background-image: url(../../images/ship_1.svg);
+        @extend %background-options;
+        &_column{
+            transform: rotate(90deg);
+        }
+    }
+    &_2{
+        width: 50px;
+        background-image: url(../../images/ship_2.svg);
+        @extend %background-options;
+        &_column{
+            transform: rotate(90deg) translate(12px, 13px);
+        }
+    }
+    &_3{
+        width: 75px;
+        background-image: url(../../images/ship_3.svg);
+        @extend %background-options;
+        &_column{
+           transform: rotate(90deg) translate(25px, 25px); 
+        }
+    }
+    &_4{
+        width: 100px;
+        background-image: url(../../images/ship_4.svg);
+        @extend %background-options;
+        &_column{
+           transform: rotate(90deg) translate(37px, 38px);
+        }
+    }
+}
+
+.animation{
+    animation-name: no-placed;
+    animation-duration: 0.2s;
+    animation-iteration-count: 3;
+}
+
+@keyframes no-placed {
+    from{
+        filter: opacity(0.3);
+    }
+
+    to{
+        filter: opacity(1);
+    }
+}
+
+@media(max-width: 740px), ((max-width: 1000px)) {
+    @media(max-height: 360px) {
+        .ship{
+            @include ship(22px, 22px, 44px, 66px, 88px)
+        }
+    }
+}
+
+@media(max-width: 370px) and (orientation: portrait) {
+    .ship{
+        @include ship(22px, 22px, 44px, 66px, 88px)
+    }
+}
+
+

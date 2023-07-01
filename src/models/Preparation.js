@@ -1,5 +1,5 @@
 import { inField, isUnderPoint, shipIteration } from "../utils/additional"
-import { ships } from "../utils/consts"
+import { SHIPS } from "../utils/consts"
 import { Ship } from "./Ship"
 
 export class Preparation {
@@ -14,8 +14,8 @@ export class Preparation {
 
     constructor(app) {
         this.app = app
-        for(const{id, startLeft, startTop, size, direction} of ships) {
-            const ship = new Ship(id, size, direction, startLeft, startTop)
+        for(const{startLeft, startTop, size, direction} of SHIPS()) {
+            const ship = new Ship(size, direction, startLeft, startTop)
             this.app.player.addShip(ship)
         }
     }
@@ -37,7 +37,6 @@ export class Preparation {
             this.offsetX = this.app.mouse.x - left
             this.offsetY = this.app.mouse.y - top
         }
-        console.log(this.dragetShip)
     }
 
     getCell() {
@@ -119,6 +118,7 @@ export class Preparation {
             this.ship.placed
             ? this.ship.setPosition('0', '0')
             : this.ship.setPosition(this.ship.startLeft, this.ship.startTop)
+            this.ship.setMoving(false)
         }
     }
 

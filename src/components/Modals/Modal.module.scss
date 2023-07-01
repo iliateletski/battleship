@@ -5,37 +5,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 0;
     z-index: 3;
 }
 
 .modal{
     width: 57%;
-    height: 39%;
+    height: max-content;
     background: linear-gradient(#b0c4de, transparent 1px), linear-gradient(90deg, #b0c4de, #fff 1px);
     background-size: 25px 25px;
     background-position: center center;
     border-radius: 15px;
-    padding: 10px;
-
-    &_inner{
-        height: 100%;
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-    }
-
-    &_body {
-        
-    }
+    padding: 35px 22px 20px;
+    box-shadow: 15px 15px 30px 5px rgba(0, 0, 0, 0.6705882353);
 
     &_content{
         text-align: center;
-        line-height: 26px;
+        line-height: 50px;
         font-size: 32px;
         font-weight: 400;
-        padding: 13px;
+        margin-bottom: 12px;
     }
 
     &_footer{
@@ -46,6 +37,23 @@
     &_btn{
         padding: 5px 30px;
         font-size: 24px;
+    }
+}
+
+@media(max-width: 740px) {
+    @media(max-height: 360px) {
+        .modal_content{
+            font-size: 26px;
+        }
+    }
+}
+
+@media(max-width: 540px) and (orientation: portrait) {
+    .modal{
+        width: 70%;
+    }
+    .modal_content{
+        font-size: 26px;
     }
 }
 

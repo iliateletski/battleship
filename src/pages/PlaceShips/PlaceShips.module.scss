@@ -1,3 +1,26 @@
+@mixin size($w, $h) {
+    width: $w;
+    height: $h;
+}
+
+@mixin position ($l, $t) {
+    left: $l;
+    top: $t;
+}
+
+@mixin max_height-360 {
+    @media(max-height: 360px){
+        .place_ships{
+            @include position(32px, 63px);
+            
+        }
+        .port_box{
+            @include size(222px, 222px);
+            margin-left: 63px;
+        }
+    }
+}
+
 .box{
     padding: 0 25px;
 }
@@ -8,26 +31,80 @@
 
 .place_ships{
     position: absolute;
-    top: 148px;
-    left: 73px;
+    @include position(73px, 148px);
     display: flex;
 }
 
 .port_box{
-    width: 254px;
-    height: 254px;
+    @include size(254px, 254px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-left: 71px;
 }
 
 .btn_box{
     display: flex;
-    height: 20%;
-    width: inherit;
     justify-content: space-between;
     align-items: center;
-    position: absolute;
+    @include size(inherit, 20%);
     bottom: 0;
 }
 
+@media(max-width: 1000px){
+    .place_ships {
+        top: 123px;
+    }
+    @media(max-height: 500px){
+        .place_ships{
+            @include position(48px, 73px);
+        }
+    }
+    @include max_height-360
+}
+
+@media(max-width: 740px){
+    .place_ships{
+        left: 48px;
+    }
+    @include max_height-360
+}
+
+@media(orientation: portrait){
+    @media(max-width: 700px){
+        .place_ships {
+            top: 47px;
+            flex-direction: column;
+        }
+    
+        .port_box{
+            margin-left: 0;
+            margin-top: 22px;
+        }
+    
+        .btn_box{
+            height: 30%;
+        }
+    }
+
+    @media(max-width: 410px){
+        .place_ships{
+            left: 22px;
+        }
+        .port_box{
+            margin-top: 19px;
+        }
+    }
+
+    @media(max-width: 360px){
+        .place_ships{
+            top: 29px;
+            left: 20px;
+        }
+    
+        .port_box{
+            width: 222px;
+            height: 222px;
+        }
+    }
+}

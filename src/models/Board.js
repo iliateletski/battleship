@@ -1,6 +1,6 @@
 import { COL_MARKERS } from "../utils/consts";
 import { makeAutoObservable } from "mobx";
-import { inField, iterationAroundShip, shipIteration, markCells } from "../utils/additional";
+import { inField, iterationAroundShip, shipIteration } from "../utils/additional";
 import { Ship } from "./Ship";
 
 export class Board {
@@ -45,9 +45,7 @@ export class Board {
             }, ship)
         }
 
-        console.log(board)
         this.board = board
-        console.log(this.ships)
     }
 
     addShip(ship, y, x) {
@@ -64,7 +62,7 @@ export class Board {
                         ship.placed
                         ? ship.setPosition('0', '0')
                         : ship.setPosition(ship.startLeft, ship.startTop)
-                        ship.moving = false
+                        ship.setMoving(false)
                         this.createBoard()
                         return false
                     }
@@ -73,11 +71,13 @@ export class Board {
             )
 
             if(!shipInField) return false
-            
-            Object.assign(ship, {placed: true, moving: false, x, y, left: '0', top: '0'})
+
+            ship.setPlaced(true)
+            ship.setMoving(false)
+            ship.setCoordinates(y, x)
+            ship.setPosition('0', '0')
             this.createBoard()
         }
-        console.log(this.ships)
         return true
     }
 
@@ -101,12 +101,19 @@ export class Board {
     }
     
     moveShip(ship) {
-        Object.assign(ship, {moving: true})
+        ship.setMoving(true)
         this.createBoard() 
     }
 
     rotateShip(ship) {
         if(!ship.placed) return false
+
+        const setAnimation = () => {
+            ship.setAnimation(true)
+            setTimeout(() => {
+                ship.setAnimation(false)
+            }, 1000)
+        }
 
         const newDirection = ship.direction === 'row' ? 'column' : 'row'
 
@@ -117,13 +124,19 @@ export class Board {
         let cX = x + (ship.size - 1) * dRow
         let cY = y + (ship.size - 1) * dColumn
 
-        if(!inField(cY, cX)) return false
+        if(!inField(cY, cX)) {
+            setAnimation()
+            return false
+        }
+        
         const{shipIds} = this.board[cY][cX]
+
         if( (!shipIds.includes(ship.id) && shipIds.length) || shipIds.length > 1) {
+            setAnimation()
             return false 
         }
 
-        Object.assign(ship, {direction: newDirection})
+        ship.setDirection(newDirection)
         this.createBoard()
     }
 
@@ -147,11 +160,10 @@ export class Board {
         const createShip = (y, x) => {
             let{ship} = this.board[y][x]
             if(!ship) {
-                ship = new Ship(y, size, direction, '0', '0')
-                Object.assign(ship, {y, x})
+                ship = new Ship(size, direction, '0', '0')
+                ship.setCoordinates(y, x)
                 this.board[y][x].ship = ship
             }
-            markCells(this.board, ship)
             return true 
         }
         

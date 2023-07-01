@@ -1,22 +1,38 @@
+@mixin max_height-360{
+    @media(max-height: 360px) {
+        .box{
+            width: 429px;
+            height: 38px;   
+            left: 17px;         
+        }        
+        .url{
+            font-size: 20px;
+        }
+    }
+}
+
 .box{
+    background: url(../../images/background_3.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 590px;
+    height: 50px;
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     align-items: center;
-    border: 2px solid;
-    border-radius: 2px;
-    /* height: 25px; */
     position: absolute;
     bottom: 100px;
     left: 73px;
-    padding: 10px 5px;
+    padding: 10px 18px;
 }
 
 .url{
+    background: transparent;
     font-size: 22px;
     font-weight: 400;
-    background: transparent;
     border: none;
-    width: 530px;
+    width: 85%;
     margin-right: 10px;
 }
 
@@ -24,13 +40,92 @@
     border: none;
     background-color: transparent;
     padding: 0;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
     cursor: pointer;
+    transition: all .2s;
 }
 
 .icon_box{
-    display: inline-flex;
+    transition: all .2s;
+    width: inherit;
+    height: inherit;
+    &:hover{
+        transform: scale(1.1);
+    }
 }
 
-.icon{
-    fill: #3355aa;
+@media(hover: hover) and (pointer: fine){
+    .icon_box {
+        &:hover {
+            transform: scale(1.1);
+        }
+        &:active {
+            transform: scale(1);
+            transition: all .1s;
+        }
+    }
+}
+
+@media(hover: none) and (pointer: coarse) { 
+    .icon_box {
+        &:active {
+            transform: scale(0.8);
+            transition: all .1s;
+        }
+    }
+}
+
+@media(max-width: 1000px) {
+    .box {
+        bottom: 48px;
+    }
+    @media(max-height: 500px) {
+        .box {
+            width: 527px;
+            height: 45px;
+            top: 4px;
+            left: 25px;
+        }
+        @include max_height-360
+    }
+}
+
+@media(max-width: 870px) {
+    .box {
+        bottom: 23px;
+    }
+}
+
+@media(max-width: 740px) {
+   .box { 
+    left: 38px;
+   }
+   @include max_height-360
+}
+
+@media(orientation: portrait){
+    @media(max-width: 700px){
+        .box{
+            background: url(../../images/background_4.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 256px;
+            height: 50px;
+            left: 48px;
+        }
+    }
+
+    @media(max-width: 410px){
+        .box{
+            left: 23px;
+        } 
+        .box{
+            left: 19px;
+            bottom: 4px;
+        }
+    }
 }

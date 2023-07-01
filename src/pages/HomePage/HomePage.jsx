@@ -1,10 +1,11 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { useNavigate } from "react-router-dom"
 import { SHIPS_ROUTE } from "../../utils/consts"
 import styles from "./HomePage.module.scss"
 import { observer } from "mobx-react-lite"
 import Container from "../../components/Container/Container"
 import { useAppContext } from "../../hook/useAppContext"
+import Button from "../../components/Button/Button"
 
 
 const HomePage = observer(() => {
@@ -14,29 +15,31 @@ const HomePage = observer(() => {
 
     return (
         <Container>
-            <div >
+            <div className={styles.inner}>
                 <div className={styles.header}>
                     <h1 className={styles.title}>
                         Морской бой
                     </h1>
                 </div>
                 <div className={styles.button_box}>
-                    <button
-                        className={styles.btn}
+                    <Button
+                        className={'home_btn'}
+                        style={{marginBottom: '12px'}}
                         onClick={() => {
                             navigate(SHIPS_ROUTE, {replace: true})
                         }}
                     >
                         С ботом
-                    </button>
-                    <button 
-                        className={styles.btn}
+                    </Button>
+                    <Button 
+                        className={'home_btn'}
+                        style={{marginBottom: '12px'}}
                         onClick={() => {
                             navigate(SHIPS_ROUTE, {replace: true})
                         }}                    
                     >
                         С другом
-                    </button>
+                    </Button>
 
                 </div>
             </div>

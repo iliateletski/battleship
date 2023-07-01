@@ -45,16 +45,3 @@ export const shipIteration = (callback, ship, {newDirection = '', y = null, x = 
     return true
 }
 
-export const markCells = (board, ship) => {
-    const dx = ship.direction === 'row'
-    const dy = ship.direction === 'column'
-    for(let y = ship.y - 1; y <= ship.y + ship.size * dy + dx ; y++) {
-        for(let x = ship.x - 1; x <= ship.x + ship.size * dx + dy; x++) {
-            if(dy && (y >= ship.y && y < ship.y + ship.size)) {
-                if(x === ship.x) x += dy
-            }
-            if(inField(y, x)) board[y][x].shot = {hit: false}
-            if(dx && y === ship.y) x += ship.size
-        }   
-    }
-}

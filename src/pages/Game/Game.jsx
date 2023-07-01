@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 import BoardComponent from "../../components/BoardComponent/BoardComponent"
 import Container from "../../components/Container/Container"
 import InfoModal from "../../components/Modals/InfoModal"
+import MoveIndicator from "../../components/MoveIndicator/MoveIndicator"
 import { useAppContext } from "../../hook/useAppContext"
 import styles from "./Game.module.scss"
 
@@ -25,7 +26,8 @@ const Game = observer(() => {
             <div className={styles.box}>
                 <div className={styles.battlefield}>
                     <BoardComponent isPlayerboard/>
-                    <div onClick={(e) => {
+                    <MoveIndicator/>
+                    <div className={styles.rival_board} onClick={(e) => {
                         if(!e.target.dataset.cell) return
                         application.game.addShot(e.target.dataset.y, e.target.dataset.x)
                     }}>

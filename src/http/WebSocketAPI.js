@@ -17,7 +17,7 @@ export class WebSocketAPI {
 
         this.removeEventListeners.push(
             addEventListeners(
-                socket, 'open', (e) => console.log(socket.readyState)
+                socket, 'open', (e) => console.log(e)
             )
         )
 
@@ -43,7 +43,6 @@ export class WebSocketAPI {
     handleMessage(e) {
         const message = JSON.parse(e.data)
         const{type} = message
-        console.log(message)
 
         if(type === 'WaitForSecondPlayer'|| type === 'SetShips' || type === 'StartGame') {
             this.app.game.setGameStatus(type)
@@ -71,7 +70,6 @@ export class WebSocketAPI {
             this.app.game.setGameStatus(type)
             this.app.game.setWin(message.win)
         }
-        console.log(this.socket.readyState)
     }
 
     sendMessage(body) {
