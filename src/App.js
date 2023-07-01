@@ -1,4 +1,4 @@
-gimport { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRoutergi } from 'react-router-dom';
 import AppRouter from './components/AppRouter';
 
 function App() {
