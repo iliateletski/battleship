@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/battleship/static/css/main.143f632f.css",
-    "main.js": "/battleship/static/js/main.68ce661d.js",
+    "main.css": "/battleship/static/css/main.f2604bbc.css",
+    "main.js": "/battleship/static/js/main.1b52cf75.js",
     "static/media/wooden-background.jpg": "/battleship/static/media/wooden-background.7f1b8d0482a9872cb886.jpg",
-    "static/media/background_3.svg": "/battleship/static/media/background_3.143f4032c58a89df3d2e.svg",
     "static/media/background_4.svg": "/battleship/static/media/background_4.66e7bc9a504de95e5ddd.svg",
     "static/media/background_2.svg": "/battleship/static/media/background_2.476a1b08690dbeea1a98.svg",
+    "static/media/background_3.svg": "/battleship/static/media/background_3.cbe86871436eaf527fc8.svg",
     "static/media/home.svg": "/battleship/static/media/home.9e8375aa556c369dc783.svg",
     "static/media/background_1.svg": "/battleship/static/media/background_1.6f3a1794bf2b39cd7a5b.svg",
     "static/media/rotate.svg": "/battleship/static/media/rotate.4178febe909c7996e2ae.svg",
@@ -17,11 +17,11 @@
     "static/media/ship_2.svg": "/battleship/static/media/ship_2.cd01419b42aa9ae907d8.svg",
     "static/media/ship_1.svg": "/battleship/static/media/ship_1.b26e66af919d02878ae1.svg",
     "index.html": "/battleship/index.html",
-    "main.143f632f.css.map": "/battleship/static/css/main.143f632f.css.map",
-    "main.68ce661d.js.map": "/battleship/static/js/main.68ce661d.js.map"
+    "main.f2604bbc.css.map": "/battleship/static/css/main.f2604bbc.css.map",
+    "main.1b52cf75.js.map": "/battleship/static/js/main.1b52cf75.js.map"
   },
   "entrypoints": [
-    "static/css/main.143f632f.css",
-    "static/js/main.68ce661d.js"
+    "static/css/main.f2604bbc.css",
+    "static/js/main.1b52cf75.js"
   ]
 }
