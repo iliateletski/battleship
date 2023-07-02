@@ -59,9 +59,7 @@ export class Board {
             const shipInField = shipIteration(
                 (y, x) => {
                     if(!inField(y, x) || !this.board[y][x].free) {
-                        ship.placed
-                        ? ship.setPosition('0', '0')
-                        : ship.setPosition(ship.startLeft, ship.startTop)
+                        ship.setPosition('0', '0')
                         ship.setMoving(false)
                         this.createBoard()
                         return false
@@ -160,7 +158,7 @@ export class Board {
         const createShip = (y, x) => {
             let{ship} = this.board[y][x]
             if(!ship) {
-                ship = new Ship(size, direction, '0', '0')
+                ship = new Ship(size, direction)
                 ship.setCoordinates(y, x)
                 this.board[y][x].ship = ship
             }

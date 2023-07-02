@@ -1,31 +1,32 @@
 .port{
-    width: 254px;
-    height: 70%;
+    width: 100%;
+    height: 100%;
     border: 2px solid transparent;
-    position: relative;
     &_lines{
-        height: 80%;
+        height: 100%;
         list-style: none;
     }
     &_line{
-        height: 25px;
-        margin-bottom: 25px;
+        height: 10%;
+        margin-bottom: 10%;
         display: flex;
     }
     &_dock{
         position: relative;
-        margin-right: 25px;
+        margin-right: 10%;
+        &_4{
+            width: 40%;
+        }
+        &_3{
+            width: 30%;
+        }
+        &_2{
+            width: 20%;
+        }
+        &_1{
+            width: 10%;
+        }
     }
-}
-
-.btn_box{
-    display: flex;
-    height: 20%;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
 }
 
 @media(max-width: 740px), (max-width: 1000px) {

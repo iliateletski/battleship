@@ -14,8 +14,8 @@ export class Preparation {
 
     constructor(app) {
         this.app = app
-        for(const{startLeft, startTop, size, direction} of SHIPS()) {
-            const ship = new Ship(size, direction, startLeft, startTop)
+        for(const{size, direction} of SHIPS) {
+            const ship = new Ship(size, direction)
             this.app.player.addShip(ship)
         }
     }
@@ -115,9 +115,7 @@ export class Preparation {
             const{y, x} = cell
             this.app.player.addShip(this.ship, y, x)
         } else {
-            this.ship.placed
-            ? this.ship.setPosition('0', '0')
-            : this.ship.setPosition(this.ship.startLeft, this.ship.startTop)
+            this.ship.setPosition('0', '0')
             this.ship.setMoving(false)
         }
     }

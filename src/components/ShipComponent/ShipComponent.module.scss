@@ -94,7 +94,7 @@
     }
 }
 
-@media(max-width: 370px) and (orientation: portrait) {
+@media(max-width: 360px) and (orientation: portrait) {
     .ship{
         @include ship(22px, 22px, 44px, 66px, 88px)
     }

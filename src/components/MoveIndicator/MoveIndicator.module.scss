@@ -7,7 +7,7 @@
 @media(orientation: portrait) {
     @media(max-width: 700px) {
         .indicator_box {
-            rotate: 90deg;
+            transform: rotate(90deg);
             left: auto;
             top: 228px;
         }
@@ -27,16 +27,3 @@
         }
     }
 } 
-// @media(max-width: 740px) {
-//     // .indicator_box{
-//     //     left: auto;
-//     //     top: 228px;
-//     //     transform: rotate(90deg);
-//     // }
-
-//     @media(max-height: 360px) {
-//         .indicator_box { 
-//             left: 221px;
-//         }
-//     }
-// }

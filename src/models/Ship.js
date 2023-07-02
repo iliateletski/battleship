@@ -7,15 +7,13 @@ export class Ship {
     placed = false
     moving = false
     animation = false
+    left = 0
+    top = 0
 
-    constructor (size, direction, startLef, startTop) {
+    constructor (size, direction) {
         this.id = uuidv4()
         this.size = size
         this.direction = direction
-        this.left = startLef
-        this.top = startTop
-        this.startLeft = startLef
-        this.startTop = startTop
         makeAutoObservable(this)
     }
 
