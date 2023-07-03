@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/battleship/static/css/main.f2604bbc.css",
-    "main.js": "/battleship/static/js/main.1b52cf75.js",
+    "main.css": "/battleship/static/css/main.92310d7c.css",
+    "main.js": "/battleship/static/js/main.71bcbc3b.js",
     "static/media/wooden-background.jpg": "/battleship/static/media/wooden-background.7f1b8d0482a9872cb886.jpg",
     "static/media/background_4.svg": "/battleship/static/media/background_4.66e7bc9a504de95e5ddd.svg",
     "static/media/background_2.svg": "/battleship/static/media/background_2.476a1b08690dbeea1a98.svg",
@@ -17,11 +17,11 @@
     "static/media/ship_2.svg": "/battleship/static/media/ship_2.cd01419b42aa9ae907d8.svg",
     "static/media/ship_1.svg": "/battleship/static/media/ship_1.b26e66af919d02878ae1.svg",
     "index.html": "/battleship/index.html",
-    "main.f2604bbc.css.map": "/battleship/static/css/main.f2604bbc.css.map",
-    "main.1b52cf75.js.map": "/battleship/static/js/main.1b52cf75.js.map"
+    "main.92310d7c.css.map": "/battleship/static/css/main.92310d7c.css.map",
+    "main.71bcbc3b.js.map": "/battleship/static/js/main.71bcbc3b.js.map"
   },
   "entrypoints": [
-    "static/css/main.f2604bbc.css",
-    "static/js/main.1b52cf75.js"
+    "static/css/main.92310d7c.css",
+    "static/js/main.71bcbc3b.js"
   ]
 }
