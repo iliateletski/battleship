@@ -58,6 +58,7 @@ export class WebSocketAPI {
         if(type === 'Continue') {
             setTimeout(() => {
                 this.app.game.setGameStatus('StartGame')
+                console.log(this.app.game.gameStatus)
             }, 3000)
         }
 
@@ -66,8 +67,10 @@ export class WebSocketAPI {
             console.log(type)
             console.log('переподключение')
             setTimeout(() => {
-                if(this.app.game.gameStatus === 'Disconnected') this.closeConnection()
-                console.log('соедененеие разорвано')
+                if(this.app.game.gameStatus === 'Disconnected') {
+                    this.closeConnection()
+                    console.log('соедененеие разорвано')
+                }
             },10000)
         }
 
