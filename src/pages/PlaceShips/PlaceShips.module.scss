@@ -11,11 +11,11 @@
 @mixin max_height-360 {
     @media(max-height: 360px){
         .place_ships{
-            @include position(32px, 63px);
+            @include position(31px, 64px);
             
         }
         .port_box{
-            @include size(222px, 222px);
+            @include size(224px, 224px);
             margin-left: 63px;
         }
     }
@@ -106,8 +106,8 @@
         }
     
         .port_box{
-            width: 222px;
-            height: 222px;
+            width: 224px;
+            height: 224px;
             margin-top: 19px;
         }
     }

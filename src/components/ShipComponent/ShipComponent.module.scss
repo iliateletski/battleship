@@ -24,7 +24,7 @@
         background-image: url(../../images/ship_2.svg);
         @extend %background-options;
         &_column{
-            transform: rotate(90deg) translate(12px, 13px);
+            transform: rotate(90deg) translate(25%, 50%);
         }
     }
     &_3{
@@ -32,7 +32,7 @@
         background-image: url(../../images/ship_3.svg);
         @extend %background-options;
         &_column{
-           transform: rotate(90deg) translate(25px, 25px); 
+            transform: rotate(90deg) translate(35%, 100%) 
         }
     }
     &_4{
@@ -40,7 +40,7 @@
         background-image: url(../../images/ship_4.svg);
         @extend %background-options;
         &_column{
-           transform: rotate(90deg) translate(37px, 38px);
+           transform: rotate(90deg) translate(37%, 150%);;
         }
     }
 }
@@ -60,7 +60,4 @@
         filter: opacity(1);
     }
 }
-
-
-
 

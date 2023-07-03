@@ -57,7 +57,7 @@
 @media(max-width: 740px) {
     @media(max-height: 360px) {
         .board{
-            @include size(222px, 222px);
+            @include size(224px, 224px);
         }
     }   
 }
@@ -78,7 +78,7 @@
 
     @media(max-width: 360px) {
         .board{
-            @include size(222px, 222px);
+            @include size(224px, 224px);
             padding: 0;
         }
     }

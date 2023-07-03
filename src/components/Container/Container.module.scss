@@ -24,7 +24,7 @@
   @media(max-height: 360px) {
     .container{
       @include cells(22px, 22px, 24px, 24px, (100% 100%, 22px 22px, 22px 22px));
-      background-position: 0px 20px, -2px -2px, -11px -11px;
+      background-position: 0px 20px, -1px -1px, -11px -11px;
       width: 550px;
       height: 307px;
     }
@@ -131,7 +131,7 @@
   @media(max-width: 360px){
     .container{
       @include cells(42px, 42px, 44px, 44px, (100% 100%, 22px 22px, 22px 22px), 270deg);
-      background-position: 0 20px, -15px -15px, -1px -1px;
+      background-position: 0px 20px, -13px -13px, -1px -1px;
       width: 307px;
       height: 550px;
     }

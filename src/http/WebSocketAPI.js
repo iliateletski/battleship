@@ -43,6 +43,7 @@ export class WebSocketAPI {
     handleMessage(e) {
         const message = JSON.parse(e.data)
         const{type} = message
+        console.log(message)
 
         if(type === 'WaitForSecondPlayer'|| type === 'SetShips' || type === 'StartGame') {
             this.app.game.setGameStatus(type)
