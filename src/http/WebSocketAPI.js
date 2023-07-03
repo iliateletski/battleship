@@ -43,14 +43,15 @@ export class WebSocketAPI {
     handleMessage(e) {
         const message = JSON.parse(e.data)
         const{type} = message
-        console.log(message)
+        console.log(this.socket.readyState)
 
         if(type === 'WaitForSecondPlayer'|| type === 'SetShips' || type === 'StartGame') {
             this.app.game.setGameStatus(type)
         }
 
         if(type === 'Disconnected') {
-            this.closeConnection()
+            // this.closeConnection()
+            console.log(type)
         }
 
         if(type === 'YourMove') {
@@ -78,6 +79,7 @@ export class WebSocketAPI {
     }
     
     handleClose(e) {
+        console.log(e.type, this.socket.readyState)
         this.app.game.setGameStatus(e.type)
         for(const removeEventListener of this.removeEventListeners) {
             removeEventListener()
