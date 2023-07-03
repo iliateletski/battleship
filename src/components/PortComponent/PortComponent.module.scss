@@ -13,18 +13,20 @@
     }
     &_dock{
         position: relative;
-        margin-right: 10%;
         &_4{
-            width: 40%;
+            width: 10%;
         }
         &_3{
-            width: 30%;
+            width: 10%;
+            margin-right: 30%;
         }
         &_2{
-            width: 20%;
+            width: 10%;
+            margin-right: 20%;
         }
         &_1{
             width: 10%;
+            margin-right: 10%;
         }
     }
 }

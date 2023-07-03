@@ -54,6 +54,7 @@ const PlaceShips = observer(() => {
                             </Button>
                             <Button 
                                 className={'general_btn'}
+                                onClick={() => document.documentElement.requestFullscreen()}
                             >
                                 Авто
                             </Button>

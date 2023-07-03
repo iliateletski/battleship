@@ -4,40 +4,15 @@
     background-size: contain;
 }
 
-@mixin ship($height, $width_1, $width_2, $width_3, $width_4) {
-    height: $height;
-    &_1 {
-        width: $width_1;
-    }
-    &_2 {
-        width: $width_2;
-        &_column {
-            transform: rotate(90deg) translate(12px, 10px);
-        }
-    }
-    &_3 {
-        width: $width_3;
-        &_column {
-            transform: rotate(90deg) translate(21px, 20px);
-        }
-    }
-    &_4 {
-        width: $width_4;
-        &_column {
-            transform: rotate(90deg) translate(35px, 33px)
-        }
-    }
-}
-
 .ship{
     touch-action: none;
     position: absolute;
     border: none;
     background-color:  transparent;
     z-index: 2;
-    height: 25px;
+    height: 100%;
     &_1{
-        width: 25px;
+        width: 100%;
         background-image: url(../../images/ship_1.svg);
         @extend %background-options;
         &_column{
@@ -45,7 +20,7 @@
         }
     }
     &_2{
-        width: 50px;
+        width: calc(100% * 2);
         background-image: url(../../images/ship_2.svg);
         @extend %background-options;
         &_column{
@@ -53,7 +28,7 @@
         }
     }
     &_3{
-        width: 75px;
+        width: calc(100% * 3);
         background-image: url(../../images/ship_3.svg);
         @extend %background-options;
         &_column{
@@ -61,7 +36,7 @@
         }
     }
     &_4{
-        width: 100px;
+        width: calc(100% * 4);
         background-image: url(../../images/ship_4.svg);
         @extend %background-options;
         &_column{
@@ -86,18 +61,6 @@
     }
 }
 
-@media(max-width: 740px), ((max-width: 1000px)) {
-    @media(max-height: 360px) {
-        .ship{
-            @include ship(22px, 22px, 44px, 66px, 88px)
-        }
-    }
-}
 
-@media(max-width: 360px) and (orientation: portrait) {
-    .ship{
-        @include ship(22px, 22px, 44px, 66px, 88px)
-    }
-}
 
 
