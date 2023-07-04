@@ -14,7 +14,7 @@ const Game = observer(() => {
     const{game} = application
 
     useEffect(() => {
-        if(game.gameStatus !== 'StartGame' || !game.gameStatus) {
+        if(game.gameStatus !== 'StartGame' || !game.gameStatus ) {
             setShowModal(true)
         } else{ 
             setShowModal(false)

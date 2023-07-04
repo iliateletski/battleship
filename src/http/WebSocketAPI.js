@@ -4,12 +4,10 @@ export class WebSocketAPI {
     removeEventListeners = []
     socket = null
     app = null
-    roomId = null
     
     constructor(roomId, app) {
         this.createWebSocket(roomId)
         this.app = app
-        this.roomId = roomId
     }
 
     async createWebSocket(roomId) {
@@ -21,7 +19,6 @@ export class WebSocketAPI {
             addEventListeners(
                 socket, 'open', (e) => {
                     console.log(e)
-                    this.isOpenSocket = true
                 }
             )
         )
@@ -43,7 +40,6 @@ export class WebSocketAPI {
                 socket, 'close', (e) => this.handleClose(e)
             )
         )
-        return socket.readyState < 2 ? true : false 
     }
 
     handleMessage(e) {
@@ -55,23 +51,8 @@ export class WebSocketAPI {
             this.app.game.setGameStatus(type)
         }
 
-        if(type === 'Continue') {
-            setTimeout(() => {
-                this.app.game.setGameStatus('StartGame')
-                console.log(this.app.game.gameStatus)
-            }, 3000)
-        }
-
         if(type === 'Disconnected') {
-            this.app.game.setGameStatus(type)
-            console.log(type)
-            console.log('переподключение')
-            setTimeout(() => {
-                if(this.app.game.gameStatus === 'Disconnected') {
-                    this.closeConnection()
-                    console.log('соедененеие разорвано')
-                }
-            },10000)
+            this.closeConnection()
         }
 
         if(type === 'YourMove') {
@@ -97,27 +78,15 @@ export class WebSocketAPI {
     sendMessage(body) {
         this.socket.send(JSON.stringify(body))
     }
-    
-    async reconnect() {
-        if(!this.roomId) return false
-        return await this.createWebSocket(this.roomId)
-    }
 
     async handleClose(e) {
-        this.app.game.setGameStatus('Disconnected')
-        const reconnect = this.reconnect()
-        if(!reconnect) {
-            this.app.game.setGameStatus(e.type)
-            this.roomId = null
-            for(const removeEventListener of this.removeEventListeners) {
-                removeEventListener()
-            } 
-        }
-        console.log(e.type, this.socket.readyState)
+        this.app.game.setGameStatus(e.type)
+        for(const removeEventListener of this.removeEventListeners) {
+            removeEventListener()
+        } 
     }
 
     closeConnection() {
-        this.roomId = null
         this.socket.close()
     }
 }

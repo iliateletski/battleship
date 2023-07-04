@@ -32,9 +32,9 @@ const PlaceShips = observer(() => {
         application.socket.sendMessage(shipPoints)
         navigate(`${GAME_ROUTE}/${roomId}`, {replace: true})
     }
-
+    
     useEffect(() => {
-        if(game.gameStatus === 'close' || game.gameStatus === 'Disconnected') {
+        if(game.gameStatus === 'close') {
             setShowModal(true)
         }
     }, [game.gameStatus])

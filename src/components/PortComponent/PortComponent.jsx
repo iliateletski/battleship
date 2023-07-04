@@ -20,13 +20,18 @@ const PortComponent = observer(({animation}) => {
         <div className={styles.port}>
             <ul className={styles.port_lines}>    
                 {
-                    groupShips.map(ships => 
-                        <li className={styles.port_line}>
+                    groupShips.map((ships, i) => 
+                        <li 
+                            className={styles.port_line}
+                            key={i}    
+                        >
                             {
                                 ships.map(ship =>
-                                    <div className={[styles.port_dock, styles[`port_dock_${ship.size}`]].join(' ')}
+                                    <div 
+                                        className={[styles.port_dock, styles[`port_dock_${ship.size}`]].join(' ')}
+                                        key={ship.id}
                                     >
-                                        <ShipComponent ship={ship} key={ship.id} animation={animation}/>
+                                        <ShipComponent ship={ship} animation={animation}/>
                                     </div>
                                 )
                             }

@@ -20,7 +20,6 @@ export const SHIPS = [
 ]
 
 export const MESSAGE = {
-    Disconnected: 'Переподключение ...',
     close: 'Соеденение разорвано.',
     SetShips: 'Ожидание соперника ...',
     WaitForSecondPlayer: 'Ожидание соперника ...',
