@@ -2,8 +2,13 @@
     background: url(../../images/home.svg);
     width: 80px;
     height: 80px;
-    display: flex;
-    justify-content: center;
+    padding: 0;
+}
+
+.fullscreen_btn {
+    background: url(../../images/fullscreen.svg);
+    width: 80px;
+    height: 80px;
     padding: 0;
 }
 
@@ -64,13 +69,15 @@
 }
 
 @media(max-width: 1000px) {
-    .goHome_btn {
+    .goHome_btn,
+    .fullscreen_btn {
         width: 60px;
         height: 60px;
     }
 
     @media(max-height: 500px) {
-        .goHome_btn{
+        .goHome_btn,
+        .fullscreen_btn {
             width: 35px;
             height: 35px;
         }
@@ -91,7 +98,7 @@
             height: 45px;
         }
 
-        .home_btn{
+        .home_btn {
             width: 225px;
             height: 45px;
             font-size: 24px;
@@ -100,7 +107,8 @@
 }
 
 @media(max-width: 540px) and (orientation: portrait) {
-    .goHome_btn{
+    .goHome_btn,
+    .fullscreen_btn {
         width: 35px;
         height: 35px;
     }

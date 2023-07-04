@@ -14,9 +14,6 @@
       height: 350px;
       @include cells(29px, 29px, 31px, 31px, (100% 100%, 25px 25px, 25px 25px));
     }
-    .header{
-      height: 50px
-    }
   }
 }
 
@@ -27,9 +24,6 @@
       background-position: 0px 20px, -1px -1px, -11px -11px;
       width: 550px;
       height: 307px;
-    }
-    .header{
-      height: 50px
     }
   }
 }
@@ -48,7 +42,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 100px;
+  height: max-content;
   padding: 10px;
 }
 
@@ -63,10 +57,6 @@
     width: 824px;
     height: 500px;
     @include cells(55px, 55px, 58px, 58px, (100% 100%, 25px 25px, 25px 25px));
-  }
-
-  .header{
-    height: 75px
   }
   
   @include max_height-500;
@@ -106,6 +96,12 @@
       height: 650px;
       @include cells(75px, 75px, 78px, 78px, (100% 100%, 25px 25px, 25px 25px), 270deg);
     }
+    
+    .header{
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+    }
   }
 
   @media(max-width: 540px){
@@ -115,7 +111,6 @@
     }
 
     .header{
-      height: 50px;
       padding: 5px;
     }
   }
