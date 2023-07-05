@@ -3,7 +3,7 @@
 Battleship - онлайн игра для двоих. Проект сделан в учебных целях на пути освоения frontend разработки. Backend был написан моим другом.
 Благодоря этому проэкту я познакомился с Web Socket. 
 
-Познакомиться с игрой можно [здесь](https://iliateletski.github.io/battleship).
+### `Познакомиться с игрой можно [здесь](https://iliateletski.github.io/battleship).`
 
 ## Сделано
     
