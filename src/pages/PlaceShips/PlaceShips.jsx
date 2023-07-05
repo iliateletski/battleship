@@ -20,7 +20,6 @@ const PlaceShips = observer(() => {
     const navigate = useNavigate()
     const {roomId} = useParams()
     const[animation, setAnimation] = useState(false)
-    const{fullScreen} = useAppContext()
 
     const sendShipPoints = () => {
         const shipPoints = application.player.shipPoints()
@@ -55,7 +54,6 @@ const PlaceShips = observer(() => {
                             </Button>
                             <Button 
                                 className={'general_btn'}
-                                onClick={() => fullScreen.toggleFullScreen()}
                             >
                                 Авто
                             </Button>
