@@ -4,12 +4,10 @@ import { SHIPS_ROUTE } from '../../utils/consts'
 import styles from './HomePage.module.scss'
 import { observer } from 'mobx-react-lite'
 import Container from '../../components/Container/Container'
-import { useAppContext } from '../../hook/useAppContext'
 import Button from '../../components/Button/Button'
 
 const HomePage = observer(() => {
 	const navigate = useNavigate()
-	const { application } = useAppContext()
 
 	return (
 		<Container>
@@ -18,15 +16,6 @@ const HomePage = observer(() => {
 					<h1 className={styles.title}>Морской бой</h1>
 				</div>
 				<div className={styles.button_box}>
-					<Button
-						className={'home_btn'}
-						style={{ marginBottom: '12px' }}
-						onClick={() => {
-							navigate(SHIPS_ROUTE, { replace: true })
-						}}
-					>
-						С ботом
-					</Button>
 					<Button
 						className={'home_btn'}
 						style={{ marginBottom: '12px' }}
