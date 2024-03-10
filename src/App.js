@@ -1,15 +1,14 @@
-import { BrowserRouter } from 'react-router-dom';
-import AppRouter from './components/AppRouter';
+import { BrowserRouter } from 'react-router-dom'
+import AppRouter from './components/AppRouter'
 
 function App() {
-  
-  return (
-    <div className='app'>
-      <BrowserRouter basename='/battleship'>
-        <AppRouter/>
-      </BrowserRouter>
-    </div>
-  );
+	return (
+		<div className='app'>
+			<BrowserRouter basename='/battleship'>
+				<AppRouter />
+			</BrowserRouter>
+		</div>
+	)
 }
 
-export default App;
+export default App

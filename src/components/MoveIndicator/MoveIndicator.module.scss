@@ -1,29 +1,28 @@
-.indicator_box{
-    position: absolute;
-    left: 254px
-    
+.indicator_box {
+	position: absolute;
+	left: 254px;
 }
 
-@media(orientation: portrait) {
-    @media(max-width: 700px) {
-        .indicator_box {
-            transform: rotate(90deg);
-            left: auto;
-            top: 228px;
-        }
-    }
+@media (orientation: portrait) {
+	@media (max-width: 700px) {
+		.indicator_box {
+			transform: rotate(90deg);
+			left: auto;
+			top: 228px;
+		}
+	}
 
-    @media(max-width: 360px) {
-        .indicator_box {
-            top: 195px;
-        }
-    }
+	@media (max-width: 360px) {
+		.indicator_box {
+			top: 195px;
+		}
+	}
 }
 
-@media(orientation: landscape) {
-    @media(max-height: 360px) {
-        .indicator_box {
-            left: 220px;
-        }
-    }
-} 
+@media (orientation: landscape) {
+	@media (max-height: 360px) {
+		.indicator_box {
+			left: 220px;
+		}
+	}
+}
