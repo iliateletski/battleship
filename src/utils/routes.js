@@ -1,3 +1,4 @@
+
 import { HOME_ROUTE, SHIPS_ROUTE } from './consts'
 import HomePage from '../pages/HomePage/HomePage'
 import PlaceShips from '../pages/PlaceShips/PlaceShips'
