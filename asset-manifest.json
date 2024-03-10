@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/battleship/static/css/main.754104e8.css",
-    "main.js": "/battleship/static/js/main.feb08894.js",
+    "main.css": "/battleship/static/css/main.a75f04ff.css",
+    "main.js": "/battleship/static/js/main.38958a96.js",
     "static/media/wooden-background.jpg": "/battleship/static/media/wooden-background.7f1b8d0482a9872cb886.jpg",
-    "static/media/background_4.svg": "/battleship/static/media/background_4.66e7bc9a504de95e5ddd.svg",
-    "static/media/background_2.svg": "/battleship/static/media/background_2.476a1b08690dbeea1a98.svg",
+    "static/media/background_4.svg": "/battleship/static/media/background_4.42695099087129c5e30c.svg",
+    "static/media/background_2.svg": "/battleship/static/media/background_2.4936d72a772620d118b9.svg",
     "static/media/background_3.svg": "/battleship/static/media/background_3.cbe86871436eaf527fc8.svg",
-    "static/media/home.svg": "/battleship/static/media/home.9e8375aa556c369dc783.svg",
-    "static/media/background_1.svg": "/battleship/static/media/background_1.6f3a1794bf2b39cd7a5b.svg",
-    "static/media/rotate.svg": "/battleship/static/media/rotate.4178febe909c7996e2ae.svg",
-    "static/media/fullscreen.svg": "/battleship/static/media/fullscreen.d1676f4b7c93b7dac621.svg",
-    "static/media/ship_3.svg": "/battleship/static/media/ship_3.3dc34f30b07799d644d4.svg",
-    "static/media/ship_4.svg": "/battleship/static/media/ship_4.bc07a653c1814ed1e6b0.svg",
-    "static/media/blue_rectangle.svg": "/battleship/static/media/blue_rectangle.d1b2797662b60fbb9d59.svg",
-    "static/media/green_rectangle.svg": "/battleship/static/media/green_rectangle.ae8ebcd4daa20bad6fdf.svg",
-    "static/media/red_rectangle.svg": "/battleship/static/media/red_rectangle.8533ddfeda181e57b5c8.svg",
-    "static/media/ship_2.svg": "/battleship/static/media/ship_2.cd01419b42aa9ae907d8.svg",
-    "static/media/ship_1.svg": "/battleship/static/media/ship_1.b26e66af919d02878ae1.svg",
+    "static/media/home.svg": "/battleship/static/media/home.8d3b226b1b495c77aa42.svg",
+    "static/media/background_1.svg": "/battleship/static/media/background_1.0fe0e428396bea7c689f.svg",
+    "static/media/rotate.svg": "/battleship/static/media/rotate.388d20109410faa5082d.svg",
+    "static/media/fullscreen.svg": "/battleship/static/media/fullscreen.697b53d4b1eda54fa942.svg",
+    "static/media/ship_3.svg": "/battleship/static/media/ship_3.f9b2064888953906dc2e.svg",
+    "static/media/ship_4.svg": "/battleship/static/media/ship_4.7bf7f65c662e2e8b7ec5.svg",
+    "static/media/blue_rectangle.svg": "/battleship/static/media/blue_rectangle.b10ce03a73621db0dd61.svg",
+    "static/media/green_rectangle.svg": "/battleship/static/media/green_rectangle.164610ab935047936efa.svg",
+    "static/media/red_rectangle.svg": "/battleship/static/media/red_rectangle.0ab69211ac448627d2a2.svg",
+    "static/media/ship_2.svg": "/battleship/static/media/ship_2.35f0ee067071f634d4fd.svg",
+    "static/media/ship_1.svg": "/battleship/static/media/ship_1.151d693a4ddb8ee5ed98.svg",
     "index.html": "/battleship/index.html",
-    "main.754104e8.css.map": "/battleship/static/css/main.754104e8.css.map",
-    "main.feb08894.js.map": "/battleship/static/js/main.feb08894.js.map"
+    "main.a75f04ff.css.map": "/battleship/static/css/main.a75f04ff.css.map",
+    "main.38958a96.js.map": "/battleship/static/js/main.38958a96.js.map"
   },
   "entrypoints": [
-    "static/css/main.754104e8.css",
-    "static/js/main.feb08894.js"
+    "static/css/main.a75f04ff.css",
+    "static/js/main.38958a96.js"
   ]
 }
