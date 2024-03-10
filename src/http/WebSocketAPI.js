@@ -1,92 +1,76 @@
-import { addEventListeners } from "../utils/additional"
+import { addEventListeners } from '../utils/additional'
 
 export class WebSocketAPI {
-    removeEventListeners = []
-    socket = null
-    app = null
-    
-    constructor(roomId, app) {
-        this.createWebSocket(roomId)
-        this.app = app
-    }
+	removeEventListeners = []
+	socket = null
+	app = null
 
-    async createWebSocket(roomId) {
-        const socket = new WebSocket(`${process.env.REACT_APP_WEBSOCKET_URL}/${roomId}`) 
+	constructor(roomId, app) {
+		this.createWebSocket(roomId)
+		this.app = app
+	}
 
-        this.socket = socket
+	async createWebSocket(roomId) {
+		const socket = new WebSocket(`${process.env.REACT_APP_WEBSOCKET_URL}/${roomId}`)
 
-        this.removeEventListeners.push(
-            addEventListeners(
-                socket, 'open', (e) => {
-                    console.log(e)
-                }
-            )
-        )
+		this.socket = socket
 
-        this.removeEventListeners.push(
-            addEventListeners(
-                socket, 'message', (e) => this.handleMessage(e)
-            )
-        )
+		this.removeEventListeners.push(
+			addEventListeners(socket, 'open', e => {
+				console.log(e)
+			})
+		)
 
-        this.removeEventListeners.push(
-            addEventListeners(
-                socket, 'error', (e) => console.log(e)
-            )
-        )
+		this.removeEventListeners.push(addEventListeners(socket, 'message', e => this.handleMessage(e)))
 
-        this.removeEventListeners.push(
-            addEventListeners(
-                socket, 'close', (e) => this.handleClose(e)
-            )
-        )
-    }
+		this.removeEventListeners.push(addEventListeners(socket, 'error', e => console.log(e)))
 
-    handleMessage(e) {
-        const message = JSON.parse(e.data)
-        const{type} = message
-        console.log(message)
+		this.removeEventListeners.push(addEventListeners(socket, 'close', e => this.handleClose(e)))
+	}
 
-        if(type === 'WaitForSecondPlayer'|| type === 'SetShips' || type === 'StartGame') {
-            this.app.game.setGameStatus(type)
-        }
+	handleMessage(e) {
+		const message = JSON.parse(e.data)
+		const { type } = message
+		console.log(message)
 
-        if(type === 'Disconnected') {
-            this.closeConnection()
-        }
+		if (type === 'WaitForSecondPlayer' || type === 'SetShips' || type === 'StartGame') {
+			this.app.game.setGameStatus(type)
+		}
 
-        if(type === 'YourMove') {
-            this.app.game.setIsPlayerMove(true)
-        }
+		if (type === 'Disconnected') {
+			this.closeConnection()
+		}
 
-        if(type === 'ShotResult') {
-            this.app.game.isPlayerMove
-            ? this.app.rival.addShot(message) 
-            : this.app.player.addShot(message)
+		if (type === 'YourMove') {
+			this.app.game.setIsPlayerMove(true)
+		}
 
-            if(this.app.game.isPlayerMove && !message.hit) {
-                this.app.game.setIsPlayerMove(false)
-            } 
-        }
+		if (type === 'ShotResult') {
+			this.app.game.isPlayerMove ? this.app.rival.addShot(message) : this.app.player.addShot(message)
 
-        if(type === 'EndGame') {
-            this.app.game.setGameStatus(type)
-            this.app.game.setWin(message.win)
-        }
-    }
+			if (this.app.game.isPlayerMove && !message.hit) {
+				this.app.game.setIsPlayerMove(false)
+			}
+		}
 
-    sendMessage(body) {
-        this.socket.send(JSON.stringify(body))
-    }
+		if (type === 'EndGame') {
+			this.app.game.setGameStatus(type)
+			this.app.game.setWin(message.win)
+		}
+	}
 
-    async handleClose(e) {
-        this.app.game.setGameStatus(e.type)
-        for(const removeEventListener of this.removeEventListeners) {
-            removeEventListener()
-        } 
-    }
+	sendMessage(body) {
+		this.socket.send(JSON.stringify(body))
+	}
 
-    closeConnection() {
-        this.socket.close()
-    }
+	async handleClose(e) {
+		this.app.game.setGameStatus(e.type)
+		for (const removeEventListener of this.removeEventListeners) {
+			removeEventListener()
+		}
+	}
+
+	closeConnection() {
+		this.socket.close()
+	}
 }

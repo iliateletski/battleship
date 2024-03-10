@@ -1,88 +1,88 @@
-@mixin position ($l, $t) {
-    left: $l;
-    top: $t;
+@mixin position($l, $t) {
+	left: $l;
+	top: $t;
 }
 
 @mixin max_height-360 {
-    @media(max-height: 360px) {
-        .battlefield {
-            top: 64px;
-            left: 33px;
-        }
-        
-        .rival_board {
-            margin-left: 64px;
-        }
-    }
+	@media (max-height: 360px) {
+		.battlefield {
+			top: 64px;
+			left: 33px;
+		}
+
+		.rival_board {
+			margin-left: 64px;
+		}
+	}
 }
 
-.box{
-    padding: 0 25px;
+.box {
+	padding: 0 25px;
 }
 
-.header{
-    position: relative;
+.header {
+	position: relative;
 }
 
-.battlefield{
-    position: absolute;
-    top: 148px;
-    left: 72px;
-    display: flex;
-    align-items: center;
+.battlefield {
+	position: absolute;
+	top: 148px;
+	left: 72px;
+	display: flex;
+	align-items: center;
 }
 
-.rival_board{
-    margin-left: 71px;
+.rival_board {
+	margin-left: 71px;
 }
 
-@media(max-width: 1000px) {
-    @media(max-height: 500px) {
-        .battlefield{
-            top: 73px;
-            left: 48px;
-        }
-    }
-    @include max_height-360;
+@media (max-width: 1000px) {
+	@media (max-height: 500px) {
+		.battlefield {
+			top: 73px;
+			left: 48px;
+		}
+	}
+	@include max_height-360;
 }
 
-@media(max-width: 740px) {
-    .battlefield {
-        left: 48px;
-    }
-    @include max_height-360;
+@media (max-width: 740px) {
+	.battlefield {
+		left: 48px;
+	}
+	@include max_height-360;
 }
 
-@media(orientation: portrait) {
-    @media(max-width: 700px) {
-        .battlefield {
-            flex-direction: column;
-            @include position(73px, 48px)
-        }
+@media (orientation: portrait) {
+	@media (max-width: 700px) {
+		.battlefield {
+			flex-direction: column;
+			@include position(73px, 48px);
+		}
 
-        .rival_board {
-            margin: 71px 0 0 0;
-        }
-    }
+		.rival_board {
+			margin: 71px 0 0 0;
+		}
+	}
 
-    @media(max-width: 540px) {
-        .battlefield {
-            left: 47px;
-        }
-    }
+	@media (max-width: 540px) {
+		.battlefield {
+			left: 47px;
+		}
+	}
 
-    @media(max-width: 410px) {
-        .battlefield {
-            left: 23px;
-        }
-    }
-    
-    @media(max-width: 360px) {
-        .battlefield {
-            @include position(21px, 28px)
-        }
-        .rival_board {
-            margin: 64px 0 0 0;
-        }
-    }
+	@media (max-width: 410px) {
+		.battlefield {
+			left: 23px;
+		}
+	}
+
+	@media (max-width: 360px) {
+		.battlefield {
+			@include position(21px, 28px);
+		}
+		.rival_board {
+			margin: 64px 0 0 0;
+		}
+	}
 }
