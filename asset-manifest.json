@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/battleship/static/css/main.a75f04ff.css",
-    "main.js": "/battleship/static/js/main.38958a96.js",
+    "main.js": "/battleship/static/js/main.67164392.js",
     "static/media/wooden-background.jpg": "/battleship/static/media/wooden-background.7f1b8d0482a9872cb886.jpg",
     "static/media/background_4.svg": "/battleship/static/media/background_4.42695099087129c5e30c.svg",
     "static/media/background_2.svg": "/battleship/static/media/background_2.4936d72a772620d118b9.svg",
@@ -19,10 +19,10 @@
     "static/media/ship_1.svg": "/battleship/static/media/ship_1.151d693a4ddb8ee5ed98.svg",
     "index.html": "/battleship/index.html",
     "main.a75f04ff.css.map": "/battleship/static/css/main.a75f04ff.css.map",
-    "main.38958a96.js.map": "/battleship/static/js/main.38958a96.js.map"
+    "main.67164392.js.map": "/battleship/static/js/main.67164392.js.map"
   },
   "entrypoints": [
     "static/css/main.a75f04ff.css",
-    "static/js/main.38958a96.js"
+    "static/js/main.67164392.js"
   ]
 }
