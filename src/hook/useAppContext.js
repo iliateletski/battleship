@@ -1,6 +1,6 @@
-import { useContext } from "react"
-import { Context } from ".."
+import { useContext } from 'react'
+import { Context } from '..'
 
 export const useAppContext = () => {
-    return useContext(Context)
-} 
+	return useContext(Context)
+}

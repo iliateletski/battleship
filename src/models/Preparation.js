@@ -1,137 +1,136 @@
-import { inField, isUnderPoint, shipIteration } from "../utils/additional"
-import { SHIPS } from "../utils/consts"
-import { Ship } from "./Ship"
+import { inField, isUnderPoint, shipIteration } from '../utils/additional'
+import { SHIPS } from '../utils/consts'
+import { Ship } from './Ship'
 
 export class Preparation {
-    app = null
-    dragetShip = null
-    dragetShipDock = null
-    ship = null
-    offsetX = null
-    offsetY = null
-    shipCells = []
-    prevCell = null
+	app = null
+	dragetShip = null
+	dragetShipDock = null
+	ship = null
+	offsetX = null
+	offsetY = null
+	shipCells = []
+	prevCell = null
 
-    constructor(app) {
-        this.app = app
-        for(const{size, direction} of SHIPS) {
-            const ship = new Ship(size, direction)
-            this.app.player.addShip(ship)
-        }
-    }
+	constructor(app) {
+		this.app = app
+		for (const { size, direction } of SHIPS) {
+			const ship = new Ship(size, direction)
+			this.app.player.addShip(ship)
+		}
+	}
 
-    setShipCells(marker, clear) {
-        for(let shipCell of this.shipCells) {
-            shipCell.placedMarker = marker
-        }
-        if(clear) this.shipCells = []
-    }
-    
-    setDragetShip(element, parentElement, ship) {
-        this.dragetShip = element
-        this.dragetShipDock = parentElement
-        this.ship = ship
-        
-        if(element) {
-            const{left, top} = this.dragetShip.getBoundingClientRect()
-            this.offsetX = this.app.mouse.x - left
-            this.offsetY = this.app.mouse.y - top
-        }
-    }
+	setShipCells(marker, clear) {
+		for (let shipCell of this.shipCells) {
+			shipCell.placedMarker = marker
+		}
+		if (clear) this.shipCells = []
+	}
 
-    getCell() {
-        const{left, top} = this.dragetShip.getBoundingClientRect()
-        const cell = this.app.player.cells[0]
-        const{width, height} = cell.getBoundingClientRect() 
+	setDragetShip(element, parentElement, ship) {
+		this.dragetShip = element
+		this.dragetShipDock = parentElement
+		this.ship = ship
 
-        const point = {
-            x: left + width / 2,
-            y: top + height / 2
-        }
+		if (element) {
+			const { left, top } = this.dragetShip.getBoundingClientRect()
+			this.offsetX = this.app.mouse.x - left
+			this.offsetY = this.app.mouse.y - top
+		}
+	}
 
-        const currentCell = this.app.player.cells.find((cell) => isUnderPoint(point, cell))
+	getCell() {
+		const { left, top } = this.dragetShip.getBoundingClientRect()
+		const cell = this.app.player.cells[0]
+		const { width, height } = cell.getBoundingClientRect()
 
-        return (
-            currentCell
-            ?{x: parseInt(currentCell.dataset.x), y: parseInt(currentCell.dataset.y)}
-            : null
-        )
-    }
+		const point = {
+			x: left + width / 2,
+			y: top + height / 2
+		}
 
-    markCell() {
-        const cell = this.getCell()
-        if(!cell) {
-            this.setShipCells(null, true)
-            return
-        }
+		const currentCell = this.app.player.cells.find(cell => isUnderPoint(point, cell))
 
-        if(!this.ship.moving && this.ship.placed) {
-            this.app.player.moveShip(this.ship)
-        }
+		return currentCell ? { x: parseInt(currentCell.dataset.x), y: parseInt(currentCell.dataset.y) } : null
+	}
 
-        const{y, x} = cell
-        let currentCell = this.app.player.board[y][x]
+	markCell() {
+		const cell = this.getCell()
+		if (!cell) {
+			this.setShipCells(null, true)
+			return
+		}
 
-        let placedMarker = 'green'
+		if (!this.ship.moving && this.ship.placed) {
+			this.app.player.moveShip(this.ship)
+		}
 
-        const shipInField = shipIteration(
-            (y, x) => {
-                if(!inField(y, x)) {
-                    this.setShipCells(null, true)
-                    return false
-                }
-                const{board} = this.app.player
-                this.shipCells.push(board[y][x])
-                if(!board[y][x].free) placedMarker = 'red'
-                return true
-            }, this.ship, {x, y})
+		const { y, x } = cell
+		let currentCell = this.app.player.board[y][x]
 
-        if(!shipInField) return false
+		let placedMarker = 'green'
 
-        this.setShipCells(placedMarker)
+		const shipInField = shipIteration(
+			(y, x) => {
+				if (!inField(y, x)) {
+					this.setShipCells(null, true)
+					return false
+				}
+				const { board } = this.app.player
+				this.shipCells.push(board[y][x])
+				if (!board[y][x].free) placedMarker = 'red'
+				return true
+			},
+			this.ship,
+			{ x, y }
+		)
 
-        if(this.prevCell !== currentCell) {
-            this.setShipCells(null, true)
-        }
-        
-        this.prevCell = currentCell
-    }
+		if (!shipInField) return false
 
-    moveShip() {
-        const{left, top} = this.dragetShipDock.getBoundingClientRect()
-        this.ship.setPosition(
-            `${this.app.mouse.x - left - this.offsetX}px`,
-            `${this.app.mouse.y - top - this.offsetY}px`
-        )
-        this.markCell()
-    }
+		this.setShipCells(placedMarker)
 
-    placeShip() {
-        const cell = this.getCell()
-        this.dragetShip = null
-        this.dragetShipDock = null
-        
-        if(cell) {
-            const{y, x} = cell
-            this.app.player.addShip(this.ship, y, x)
-        } else {
-            this.ship.setPosition('0', '0')
-            this.ship.setMoving(false)
-        }
-    }
+		if (this.prevCell !== currentCell) {
+			this.setShipCells(null, true)
+		}
 
-    update() {
-        if(this.dragetShip && this.app.mouse.left) {
-            this.moveShip()        
-        }
+		this.prevCell = currentCell
+	}
 
-        if(this.dragetShip && !this.app.mouse.left) {
-            this.placeShip()
-        }
-    }
+	moveShip() {
+		const { left, top } = this.dragetShipDock.getBoundingClientRect()
+		this.ship.setPosition(
+			`${this.app.mouse.x - left - this.offsetX}px`,
+			`${this.app.mouse.y - top - this.offsetY}px`
+		)
+		this.markCell()
+	}
 
-    rotateShip() {
-        if(!this.ship) return false
-        this.app.player.rotateShip(this.ship)
-    }
+	placeShip() {
+		const cell = this.getCell()
+		this.dragetShip = null
+		this.dragetShipDock = null
+
+		if (cell) {
+			const { y, x } = cell
+			this.app.player.addShip(this.ship, y, x)
+		} else {
+			this.ship.setPosition('0', '0')
+			this.ship.setMoving(false)
+		}
+	}
+
+	update() {
+		if (this.dragetShip && this.app.mouse.left) {
+			this.moveShip()
+		}
+
+		if (this.dragetShip && !this.app.mouse.left) {
+			this.placeShip()
+		}
+	}
+
+	rotateShip() {
+		if (!this.ship) return false
+		this.app.player.rotateShip(this.ship)
+	}
 }

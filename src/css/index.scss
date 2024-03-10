@@ -1,49 +1,41 @@
 *,
 *::after,
-*::before{
-  box-sizing: border-box;
+*::before {
+	box-sizing: border-box;
 }
 
 body {
-  // touch-action: 
-  background-image: url(../images/wooden-background.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  font-family: 'Marck Script', cursive;
-  font-size: 66px;
-  font-weight: 600;
-  color: #3355aa;
-  // overflow: none;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
+	// touch-action:
+	background-image: url(../images/wooden-background.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	font-family: 'Marck Script', cursive;
+	font-size: 66px;
+	font-weight: 600;
+	color: #3355aa;
+	// overflow: none;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	user-select: none;
 }
 
-button{
-  font-family: 'Marck Script', cursive;
-  color: #3355aa;
-  outline: none;
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-  -webkit-tap-highlight-color: transparent;
+button {
+	font-family: 'Marck Script', cursive;
+	color: #3355aa;
+	outline: none;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	-webkit-tap-highlight-color: transparent;
 }
 
-input{
-  font-family: 'Marck Script', cursive;
-  color: #3355aa;
+input {
+	font-family: 'Marck Script', cursive;
+	color: #3355aa;
 }
 
-a{
-  color: #3355aa;
-  text-decoration: none;
+a {
+	color: #3355aa;
+	text-decoration: none;
 }
-
-
-
-
-
-
-
-

@@ -1,80 +1,80 @@
-.header{
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
-    margin-bottom: 20px;
+.header {
+	display: flex;
+	justify-content: center;
+	padding: 20px 0;
+	margin-bottom: 20px;
 }
 
-.title{
-    font-size: 62px;
-    line-height: 70px;
+.title {
+	font-size: 62px;
+	line-height: 70px;
 }
 
-.button_box{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+.button_box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
 }
 
-.btn{
-    font-size: 28px;
-    min-width: 200px;
-    height: 40px;
-    padding: 5px;
-    margin-bottom: 10px;
-    border: 2px solid;
-    margin-bottom: 10px;
-    transition: all .1s;
-    background-color: transparent;
-    &:hover{
-        font-size: 30px;
-    }
+.btn {
+	font-size: 28px;
+	min-width: 200px;
+	height: 40px;
+	padding: 5px;
+	margin-bottom: 10px;
+	border: 2px solid;
+	margin-bottom: 10px;
+	transition: all 0.1s;
+	background-color: transparent;
+	&:hover {
+		font-size: 30px;
+	}
 }
 
-@media(max-width: 1000px) {
-    .header{
-        padding: 10px 0;
-        margin-bottom: 27px;
-    }
-    
-    .title{
-        font-size: 58px;
-        line-height: 48px;
-    }
+@media (max-width: 1000px) {
+	.header {
+		padding: 10px 0;
+		margin-bottom: 27px;
+	}
 
-    @media(max-height: 500px) {
-        .header{
-            margin-bottom: 12px;
-        }
-    }
+	.title {
+		font-size: 58px;
+		line-height: 48px;
+	}
 
-    @media(max-height: 360px) {
-        .title{
-            font-size: 50px;
-            line-height: 36px;
-        }
-    }
+	@media (max-height: 500px) {
+		.header {
+			margin-bottom: 12px;
+		}
+	}
+
+	@media (max-height: 360px) {
+		.title {
+			font-size: 50px;
+			line-height: 36px;
+		}
+	}
 }
 
-@media(max-width: 740px){
-    @media(max-height: 360px) {
-        .title{
-            font-size: 50px;
-            line-height: 36px;
-        }
-    }
+@media (max-width: 740px) {
+	@media (max-height: 360px) {
+		.title {
+			font-size: 50px;
+			line-height: 36px;
+		}
+	}
 }
 
-@media(max-width: 560px){
-    .title{
-      font-size: 50px;
-    }
+@media (max-width: 560px) {
+	.title {
+		font-size: 50px;
+	}
 }
 
-@media(max-width: 360px) and (orientation: portrait) {
-    .title{
-      font-size: 50px;
-      line-height: 36px;
-    }
+@media (max-width: 360px) and (orientation: portrait) {
+	.title {
+		font-size: 50px;
+		line-height: 36px;
+	}
 }
